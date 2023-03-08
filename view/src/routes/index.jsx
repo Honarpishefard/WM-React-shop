@@ -1,4 +1,4 @@
-import { Home, Signup, Login, Cards, CardDetails } from "pages";
+import { Home, Signup, Login, Products, ProductDetails } from "pages";
 
 export const routes = [
   {
@@ -14,11 +14,11 @@ export const routes = [
     element: <Login />,
   },
   {
-    path: "cards",
-    element: <Cards />,
+    path: "products/:category",
+    element: <Products />,
   },
   {
-    path: "cards/:id",
-    element: <CardDetails />,
+    path: "",
+    element: <ProductDetails />,
   },
 ];

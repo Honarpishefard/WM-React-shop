@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const { User } = require("../../../model/User");
 
 const handleRegister = async (req, res) => {
-  const { email, password, repeatPassword } = req.body
+  const { name, email, password, repeatPassword } = req.body
   if (!email)
     return res.status(400).json({
       message: "no email entered",
@@ -19,7 +19,7 @@ const handleRegister = async (req, res) => {
   };
 
   const hashedPassword = await bcrypt.hash(password, 8);
-  const user = new User({ email, password: hashedPassword });
+  const user = new User({ ...req.body, password: hashedPassword });
   user.save((err) => {
     console.log(err);
   });

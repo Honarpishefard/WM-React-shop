@@ -1,3 +1,3 @@
 export * from './auth';
-export * from './fetchCards';
+export * from './fetchProducts';
 

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { fetchCardsService, mediaURL } from "api";
+import { fetchProductsService, mediaURL } from "api";
 import { Link } from "react-router-dom";
 
-export const Cards = () => {
+export const Products = () => {
   const [data, setData] = useState();
   useEffect(() => {
-    fetchCardsService().then((res) => setData(res.data.data));
+    fetchProductsService().then((res) => setData(res.data.data));
   }, []);
 
   return (

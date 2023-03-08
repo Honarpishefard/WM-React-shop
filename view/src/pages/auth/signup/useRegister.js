@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router';
 
 const registerSchema = yup
   .object({
+    name: yup.string().required("please enter your name"),
     email: yup.string().required("please enter an email"),
     password: yup.string().required("please enter a valid password"),
     repeatPassword: yup.string().required("please enter your password again"),
