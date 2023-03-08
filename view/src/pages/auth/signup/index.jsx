@@ -2,7 +2,7 @@ import { Button, TextField } from "components";
 import useRegister from "./useRegister";
 import { Link } from 'react-router-dom';
 
-export function Register() {
+export function Signup() {
   const { onRegister, handleSubmit, register, errors, loading } = useRegister();
 
   return (

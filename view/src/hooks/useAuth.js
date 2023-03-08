@@ -12,8 +12,6 @@ const useAuth = () => {
     if (loginToken) {
       mainInstance.defaults.headers.Authorization = loginToken;
       if (["/login", "/register"].includes(pathname)) navigate("/");
-    } else {
-      if (!["/login", "/register"].includes(pathname)) navigate("/login");
     }
   }, [loginToken]);
 };
