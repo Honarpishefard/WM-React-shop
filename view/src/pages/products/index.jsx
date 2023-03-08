@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { fetchProductsService, mediaURL } from "api";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router";
 
 export const Products = () => {
+  const { category } = useParams();
   const [data, setData] = useState();
   useEffect(() => {
-    fetchProductsService().then((res) => setData(res.data.data));
+    fetchProductsService(category).then((res) => setData(res.data.data));
   }, []);
 
   return (

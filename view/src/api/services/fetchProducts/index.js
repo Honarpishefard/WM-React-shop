@@ -1,7 +1,7 @@
 import { mainInstance } from "api";
 
-export const fetchProductsService = () => {
-  return mainInstance.get("/products");
+export const fetchProductsService = (category) => {
+  return mainInstance.get(`/products?category=${category}`);
 };
 
 export const fetchProductDetailsService = (cardId) => {
