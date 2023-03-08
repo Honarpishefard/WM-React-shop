@@ -7,7 +7,7 @@ export const Products = () => {
   const { category } = useParams();
   const [data, setData] = useState();
   useEffect(() => {
-    fetchProductsService(category).then((res) => setData(res.data.data));
+    fetchProductsService(category || '').then((res) => setData(res.data.data));
   }, []);
 
   return (

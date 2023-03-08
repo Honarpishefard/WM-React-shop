@@ -18,7 +18,7 @@ export const routes = [
     element: <Products />,
   },
   {
-    path: "",
-    element: <ProductDetails />,
+    path: "products",
+    element: <Products />,
   },
 ];
