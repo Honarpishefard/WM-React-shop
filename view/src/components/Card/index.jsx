@@ -13,7 +13,7 @@ export const Card = ({ title, newPrice, oldPrice, image }) => {
           {title}
         </h5>
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4 flex-wrap justify-center pb-4">
+          <div className="flex items-center gap-4 flex-wrap justify-center">
             <span className="text-xl font-bold text-gray-900 dark:text-white">
               {newPrice}
             </span>
