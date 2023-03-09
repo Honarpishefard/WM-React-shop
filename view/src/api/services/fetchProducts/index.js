@@ -4,6 +4,6 @@ export const fetchProductsService = (category) => {
   return mainInstance.get(`/products?category=${category}`);
 };
 
-export const fetchProductDetailsService = (cardId) => {
-  return mainInstance.get(`/products?cardId=${cardId}`);
+export const fetchProductDetailsService = (category, id) => {
+  return mainInstance.get(`/products?category=${category}&productId=${id}`);
 };

@@ -4,16 +4,16 @@ import { fetchProductDetailsService } from "api";
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState({});
-  const { id, category } = useParams();
+  const { category, id } = useParams();
   useEffect(() => {
-    fetchProductDetailsService(id || category).then((res) =>
+    fetchProductDetailsService(category, id).then((res) =>
       setProduct(res.data.data[0])
     );
   }, []);
 
   return (
     <>
-      <p>product.desc</p>
+      <p>{product.title}</p>
     </>
   );
 };
