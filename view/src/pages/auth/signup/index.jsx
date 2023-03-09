@@ -1,7 +1,7 @@
 import { Button, TextField } from "components";
 import useRegister from "./useRegister";
 import { Link } from "react-router-dom";
-import logo from "./../../../../public/headerLogo.jpg";
+import logo from "assets/images/headerLogo.jpg";
 
 export function Signup() {
   const { onRegister, handleSubmit, register, errors, loading } = useRegister();

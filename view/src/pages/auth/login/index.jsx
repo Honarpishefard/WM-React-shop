@@ -1,7 +1,7 @@
 import { Button, TextField } from "components";
 import useLogin from "./useLogin";
 import { Link } from "react-router-dom";
-import logo from "./../../../../public/headerLogo.jpg";
+import logo from "assets/images/headerLogo.jpg";
 
 export const Login = () => {
   const { onLogin, handleSubmit, register, errors, loading } = useLogin();
