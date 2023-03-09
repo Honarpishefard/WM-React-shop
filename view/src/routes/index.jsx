@@ -14,11 +14,19 @@ export const routes = [
     element: <Login />,
   },
   {
+    path: "products",
+    element: <Products />,
+  },
+  {
     path: "products/:category",
     element: <Products />,
   },
   {
-    path: "products",
-    element: <Products />,
+    path: "products/:id",
+    element: <ProductDetails />,
+  },
+  {
+    path: "products/:category/:id",
+    element: <ProductDetails />,
   },
 ];
