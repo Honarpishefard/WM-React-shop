@@ -4,13 +4,11 @@ import { Link } from "react-router-dom";
 import { HeroSec } from "./HomeComponents";
 import { fetchProductsService, mediaURL } from "api";
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 
 export const Home = () => {
   const [data, setData] = useState();
   const { category } = useParams();
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
   const [loading, setLoading] = useState(true);
 
   const array = [23, 10, 15, 20];
@@ -46,7 +44,7 @@ export const Home = () => {
           </svg>
         </Link>
       </div>
-      <div className="grid gap-5 mx-auto my-6 px-10 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
+      <div className="grid gap-7 mx-auto mb-14 px-10 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
         {array?.map((i) =>
           loading ? (
             <CardSkeleton key={i._id} />

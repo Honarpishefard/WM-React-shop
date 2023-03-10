@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import {
   fetchProductDetailsService,
   fetchProductsService,
@@ -8,6 +8,8 @@ import {
 import { Footer, Header } from "layout";
 import { Skeleton } from "./Skeleton";
 import "./index.css";
+import { Card, CardSkeleton } from "components";
+import { Link } from "react-router-dom";
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -15,21 +17,21 @@ export const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const { category, sec, id } = useParams();
 
-  // console.log(suggestedproducts)
-
   useEffect(() => {
     fetchProductDetailsService(category, sec, id).then((res) => {
       setProduct(res.data.data[0]);
       setLoading(false);
       fetchProductsService(res.data.data[0].category[0]).then((result) => {
         const data = result.data.data;
-        data.map((i) => {
-          if (i.category[1] === res.data.data[0].category[1])
-            console.log(i)
+        let arr = data.filter((a) => {
+          if (a.category[1] == sec && a._id != id) {
+            return a;
+          }
         });
+        setSuggestedproducts([arr[0], arr[1], arr[2]]);
       });
     });
-  }, []);
+  }, [category, sec, id]);
 
   return (
     <>
@@ -51,7 +53,7 @@ export const ProductDetails = () => {
               <p className="text-2xl text-gray-900 dark:text-white font-medium">
                 {product.newPrice}
               </p>
-              <p className="text-xl text-gray-500 dark:text-white font-medium">
+              <p className="text-xl text-gray-500 line-through dark:text-white font-medium">
                 {product.oldPrice}
               </p>
             </div>
@@ -65,8 +67,24 @@ export const ProductDetails = () => {
         <p className="text-2xl text-gray-900 dark:text-white font-bold py-6 border-t">
           You may also like
         </p>
-        <div>
-          {/* {suggested?.map((i) => console.log(i))} */}
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 px-10 pb-14 pt-5 gap-10">
+          {suggestedproducts?.map((i) =>
+            loading ? (
+              <CardSkeleton key={i._id} />
+            ) : (
+              <Link
+                to={`/products/${i.category[0]}/${i.category[1]}/${i._id}`}
+                key={i._id}
+              >
+                <Card
+                  title={i.title}
+                  oldPrice={i.oldPrice}
+                  newPrice={i.newPrice}
+                  image={mediaURL + i.image}
+                />
+              </Link>
+            )
+          )}
         </div>
       </div>
       <Footer />

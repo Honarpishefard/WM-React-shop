@@ -3,11 +3,11 @@ import { fetchProductsService, mediaURL } from "api";
 import { useLocation, useParams, useNavigate } from "react-router";
 import { Card, CardSkeleton } from "components";
 import { Footer, Header } from "layout";
-import { Tabs } from "./Tabs";
+import { SideBar } from "./SideBar";
 
 export const Products = () => {
   const [data, setData] = useState();
-  const { category, sec } = useParams();
+  const { category } = useParams();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [loading, setLoading] = useState(true);
@@ -20,10 +20,7 @@ export const Products = () => {
   }, [category]);
 
   const handleNav = (id, category, sec) => {
-    console.log(category);
-    console.log(sec);
     if (["/products/men", "/products/women"].includes(pathname)) {
-      // navigate(`${pathname}/${id}`);
       navigate(`${pathname}/${sec}/${id}`);
     } else {
       navigate(`${pathname}/${category}/${sec}/${id}`);
@@ -34,7 +31,7 @@ export const Products = () => {
     <>
       <Header />
       <div className="flex">
-        <Tabs />
+        <SideBar sec1="coats" sec2="Dresses" />
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-10 justify-center p-8">
           {data?.map((i) =>
             loading ? (

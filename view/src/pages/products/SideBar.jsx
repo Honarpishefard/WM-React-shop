@@ -1,4 +1,4 @@
-export const Tabs = () => {
+export const SideBar = ({ sec1, sec2, sec3 }) => {
   return (
     <>
       <div className="mb-4 border-gray-200 dark:border-gray-700 pt-5 border-r w-1/5">
@@ -11,53 +11,40 @@ export const Tabs = () => {
           <li className="mr-2" role="presentation">
             <button
               className="inline-block p-4 border-b-2 rounded-t-lg"
-              id="profile-tab"
-              data-tabs-target="#profile"
+              id={`${sec1}-tab`}
+              data-tabs-target={`#${sec1}`}
               type="button"
               role="tab"
-              aria-controls="profile"
+              aria-controls={sec1}
               aria-selected="false"
             >
-              Profile
+              {sec1}
             </button>
           </li>
           <li className="mr-2" role="presentation">
             <button
               className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-              id="dashboard-tab"
-              data-tabs-target="#dashboard"
+              id={`${sec2}-tab`}
+              data-tabs-target={`#${sec2}`}
               type="button"
               role="tab"
-              aria-controls="dashboard"
+              aria-controls={sec2}
               aria-selected="false"
             >
-              Dashboard
+              {sec2}
             </button>
           </li>
           <li className="mr-2" role="presentation">
             <button
               className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-              id="settings-tab"
-              data-tabs-target="#settings"
+              id={`${sec3}-tab`}
+              data-tabs-target={`#${sec3}`}
               type="button"
               role="tab"
-              aria-controls="settings"
+              aria-controls={sec3}
               aria-selected="false"
             >
-              Settings
-            </button>
-          </li>
-          <li role="presentation">
-            <button
-              className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-              id="contacts-tab"
-              data-tabs-target="#contacts"
-              type="button"
-              role="tab"
-              aria-controls="contacts"
-              aria-selected="false"
-            >
-              Contacts
+              {sec3}
             </button>
           </li>
         </ul>
@@ -65,9 +52,9 @@ export const Tabs = () => {
       <div id="myTabContent">
         <div
           className="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
-          id="profile"
+          id={sec1}
           role="tabpanel"
-          aria-labelledby="profile-tab"
+          aria-labelledby={`${sec1}-tab`}
         >
           <p className="text-sm text-gray-500 dark:text-gray-400">
             This is some placeholder content the{" "}
@@ -81,9 +68,9 @@ export const Tabs = () => {
         </div>
         <div
           className="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
-          id="dashboard"
+          id={sec2}
           role="tabpanel"
-          aria-labelledby="dashboard-tab"
+          aria-labelledby={`${sec2}-tab`}
         >
           <p className="text-sm text-gray-500 dark:text-gray-400">
             This is some placeholder content the{" "}
@@ -97,30 +84,14 @@ export const Tabs = () => {
         </div>
         <div
           className="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
-          id="settings"
+          id={sec3}
           role="tabpanel"
-          aria-labelledby="settings-tab"
+          aria-labelledby={`${sec3}-tab`}
         >
           <p className="text-sm text-gray-500 dark:text-gray-400">
             This is some placeholder content the{" "}
             <strong className="font-medium text-gray-800 dark:text-white">
               Settings tab's associated content
-            </strong>
-            . Clicking another tab will toggle the visibility of this one for
-            the next. The tab JavaScript swaps classes to control the content
-            visibility and styling.
-          </p>
-        </div>
-        <div
-          className="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
-          id="contacts"
-          role="tabpanel"
-          aria-labelledby="contacts-tab"
-        >
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            This is some placeholder content the{" "}
-            <strong className="font-medium text-gray-800 dark:text-white">
-              Contacts tab's associated content
             </strong>
             . Clicking another tab will toggle the visibility of this one for
             the next. The tab JavaScript swaps classes to control the content
