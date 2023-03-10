@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import { fetchProductsService, mediaURL } from "api";
 import { useLocation, useParams, useNavigate } from "react-router";
-import { Card } from "components";
+import { Card, CardSkeleton } from "components";
 import { Footer, Header } from "layout";
 import { Tabs } from "./Tabs";
-import { Skeleton } from "./Skeleton";
 
 export const Products = () => {
   const [data, setData] = useState();
   const { category } = useParams();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -37,7 +35,7 @@ export const Products = () => {
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-10 justify-center p-8">
           {data?.map((i) =>
             loading ? (
-              <Skeleton key={i._id} />
+              <CardSkeleton key={i._id} />
             ) : (
               <div onClick={() => handleNav(i._id, i.category[0])} key={i._id}>
                 <Card

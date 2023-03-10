@@ -5,7 +5,7 @@ const Product = mongoose.model("product", {
   desc: { type: String, require: true },
   price: { type: String, require: true },
   category: { type: Array },
-  color: { type: Array },
+  colors: { type: Array },
   picture: { type: String, require: true },
 });
 

@@ -1,19 +1,37 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { fetchProductDetailsService, mediaURL } from "api";
+import {
+  fetchProductDetailsService,
+  fetchProductsService,
+  mediaURL,
+} from "api";
 import { Footer, Header } from "layout";
 import { Skeleton } from "./Skeleton";
 import "./index.css";
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState({});
+  const [suggestedproducts, setSuggestedproducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const { category, id } = useParams();
+
+  // console.log(suggestedproducts)
+  let suggested = [{}]
+  // suggested.push(2)
+  console.log(suggested)
+
   useEffect(() => {
     fetchProductDetailsService(category, id).then((res) => {
       setProduct(res.data.data[0]);
       setLoading(false);
+      fetchProductsService(res.data.data[0].category[0]).then((result) => {
+        const data = result.data.data;
+        data.map((i) => {
+          if (i.category[1] === res.data.data[0].category[1])
+            suggested.push({...i})
+            // console.log(i)
+        });
+      });
     });
   }, []);
 
@@ -47,7 +65,14 @@ export const ProductDetails = () => {
           </div>
         </div>
       )}
-
+      <div className="flex justify-center flex-col items-center">
+        <p className="text-2xl text-gray-900 dark:text-white font-bold py-6 border-t">
+          You may also like
+        </p>
+        <div>
+          {/* {suggested?.map((i) => console.log(i))} */}
+        </div>
+      </div>
       <Footer />
     </>
   );
