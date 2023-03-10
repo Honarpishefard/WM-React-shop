@@ -9,12 +9,12 @@ import { Skeleton } from "./Skeleton";
 export const Products = () => {
   const [data, setData] = useState();
   const { category } = useParams();
+  const navigate = useNavigate();
   const { pathname } = useLocation();
+
   const [loading, setLoading] = useState(true);
-  const nagivate = useNavigate();
 
   useEffect(() => {
-    setLoading(true);
     fetchProductsService(category || "").then((res) => {
       setData(res.data.data);
       setLoading(false);
@@ -23,9 +23,9 @@ export const Products = () => {
 
   const handleNav = (id, category) => {
     if (["/products/men", "/products/women"].includes(pathname)) {
-      nagivate(pathname + "/" + id);
+      navigate(pathname + "/" + id);
     } else {
-      nagivate(pathname + "/" + category + "/" + id);
+      navigate(pathname + "/" + category + "/" + id);
     }
   };
 
@@ -37,7 +37,7 @@ export const Products = () => {
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-10 justify-center p-8">
           {data?.map((i) =>
             loading ? (
-              <Skeleton key={i._id}/>
+              <Skeleton key={i._id} />
             ) : (
               <div onClick={() => handleNav(i._id, i.category[0])} key={i._id}>
                 <Card
