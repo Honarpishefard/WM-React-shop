@@ -52,7 +52,7 @@ export const Home = () => {
             <CardSkeleton key={i._id} />
           ) : data ? (
             <Link
-              to = {`/products/${data[i].category[0]}/${data[i]._id}`}
+              to = {`/products/${data[i].category[0]}/${data[i].category[1]}/${data[i]._id}`}
               key={i?._id}
             >
               <Card

@@ -13,23 +13,19 @@ export const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const [suggestedproducts, setSuggestedproducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { category, id } = useParams();
+  const { category, sec, id } = useParams();
 
   // console.log(suggestedproducts)
-  let suggested = [{}]
-  // suggested.push(2)
-  console.log(suggested)
 
   useEffect(() => {
-    fetchProductDetailsService(category, id).then((res) => {
+    fetchProductDetailsService(category, sec, id).then((res) => {
       setProduct(res.data.data[0]);
       setLoading(false);
       fetchProductsService(res.data.data[0].category[0]).then((result) => {
         const data = result.data.data;
         data.map((i) => {
           if (i.category[1] === res.data.data[0].category[1])
-            suggested.push({...i})
-            // console.log(i)
+            console.log(i)
         });
       });
     });

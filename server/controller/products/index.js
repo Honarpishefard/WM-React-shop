@@ -1,6 +1,7 @@
 const { Product } = require("../../model/product");
 
 const fetchProducts = async (req, res) => {
+  console.log(req.query)
   if (req.query.category) {
     if (req.query.productId) {
       const product = await Product.find({
