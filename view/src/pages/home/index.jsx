@@ -22,10 +22,11 @@ export const Home = () => {
 
   return (
     <>
-      <Header />
-      <HeroSec />
+      <Header key="header" />
+      <HeroSec key="hero" />
       <div className="flex justify-end py-6 px-9">
         <Link
+          key="seeMore"
           to="/products"
           className="flex max-w-fit rounded-3xl px-5 py-3 items-center font-medium text-gray-700 border-b border-gray-100 hover:bg-primary-100 lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
         >
@@ -50,7 +51,7 @@ export const Home = () => {
             <CardSkeleton key={i._id} />
           ) : data ? (
             <Link
-              to = {`/products/${data[i].category[0]}/${data[i].category[1]}/${data[i]._id}`}
+              to={`/products/${data[i].category[0]}/${data[i].category[1]}/${data[i]._id}`}
               key={i?._id}
             >
               <Card
@@ -64,7 +65,7 @@ export const Home = () => {
           ) : null
         )}
       </div>
-      <Footer />
+      <Footer key="footer" />
     </>
   );
 };

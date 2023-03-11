@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import logo from "assets/images/headerLogo.jpg";
 import Cookies from "js-cookie";
-import { handleLogOut } from "utils/logout";
-import { useState } from "react";
 import { Button } from "components";
+import { UserAvatar } from "./Avatar";
 
 export const Header = () => {
-  const [token, setToken] = useState(Cookies.get("loginToken") || "");
+  const token = Cookies.get("loginToken")
 
   return (
     <header>
@@ -32,16 +31,7 @@ export const Header = () => {
                 </Link>
               </div>
             ) : (
-              <p
-                onClick={() => {
-                  handleLogOut();
-                  setToken("");
-                }}
-                to="/login"
-                className="text-primary-700 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-              >
-                Log out
-              </p>
+              <UserAvatar />
             )}
             <button
               data-collapse-toggle="mobile-menu-2"
