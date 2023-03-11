@@ -3,9 +3,10 @@ import { fetchUserService, loginService } from "api";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import Cookies from "js-cookie";
+import { store } from "context";
 
 const loginSchema = yup
   .object({
@@ -14,7 +15,7 @@ const loginSchema = yup
   })
   .required();
 
-const useLogin = () => {
+const useLogin = (email) => {
   const {
     register,
     handleSubmit,
@@ -22,10 +23,9 @@ const useLogin = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema), mode: "onBlur" });
 
-  console.log(loginSchema)
-
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { user, setUser } = useContext(store);
 
   const onLogin = async (data) => {
     setLoading(true);
@@ -35,7 +35,8 @@ const useLogin = () => {
       Cookies.set("loginToken", res?.data?.token, { expires: 7 });
       navigate("/");
       setLoading(false);
-      fetchUserService({email:'arnhnpf@gmail.com'});
+      const user = await fetchUserService({ email });
+      setUser(user.user[0]);
     } catch (ex) {
       toast.error(ex?.response?.data?.message);
       setLoading(false);

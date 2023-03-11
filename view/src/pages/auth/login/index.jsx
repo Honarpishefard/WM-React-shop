@@ -2,9 +2,11 @@ import { Button, TextField } from "components";
 import useLogin from "./useLogin";
 import { Link } from "react-router-dom";
 import logo from "assets/images/headerLogo.jpg";
+import { useState } from "react";
 
 export const Login = () => {
-  const { onLogin, handleSubmit, register, errors, loading } = useLogin();
+  const [userEmail, setUserEmail] = useState();
+  const { onLogin, handleSubmit, register, errors, loading } = useLogin(userEmail);
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -20,6 +22,7 @@ export const Login = () => {
             </h1>
             <form onSubmit={handleSubmit(onLogin)}>
               <TextField
+                onChange={(e) => setUserEmail(e.target.value)}
                 label="Your email"
                 htmlFor="email"
                 type="email"
@@ -63,6 +66,9 @@ export const Login = () => {
                 Sign up
               </Link>
             </p>
+            {/* <p className="text-3xl font-bold" ref={emailRef}>
+              HI
+            </p> */}
           </div>
         </div>
       </div>

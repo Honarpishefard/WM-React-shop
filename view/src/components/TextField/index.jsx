@@ -1,6 +1,13 @@
-export const TextField = ({ label, error, validation, htmlFor, ...props }) => {
+export const TextField = ({
+  label,
+  error,
+  validation,
+  htmlFor,
+  onChange,
+  ...props
+}) => {
   return (
-    <div className="mb-6">
+    <div className="mb-6" onChange={onChange}>
       <label
         htmlFor={htmlFor}
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
