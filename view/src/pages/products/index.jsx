@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { fetchProductsService, mediaURL } from "api";
 import { useLocation, useParams, useNavigate } from "react-router";
 import { Card, CardSkeleton } from "components";
 import { Footer, Header } from "layout";
 import { SideBar } from "./SideBar";
+import { store } from "context";
 
 export const Products = () => {
-  const [data, setData] = useState();
+  const { products, setProducts } = useContext(store);
   const { category } = useParams();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -14,7 +15,7 @@ export const Products = () => {
 
   useEffect(() => {
     fetchProductsService(category || "").then((res) => {
-      setData(res.data.data);
+      setProducts(res.data.data);
       setLoading(false);
     });
   }, [category]);
@@ -33,7 +34,7 @@ export const Products = () => {
       <div className="flex">
         <SideBar sec1="coats" sec2="Dresses" />
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-10 justify-center p-8">
-          {data?.map((i) =>
+          {products?.map((i) =>
             loading ? (
               <CardSkeleton key={i._id} />
             ) : (

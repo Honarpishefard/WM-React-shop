@@ -33,6 +33,7 @@ const useLogin = () => {
       Cookies.set("loginToken", res?.data?.token, { expires: 7 });
       navigate("/");
       setLoading(false);
+      console.log(res)
     } catch (ex) {
       toast.error(ex?.response?.data?.message);
       setLoading(false);
