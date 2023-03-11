@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { loginService } from "api";
+import { fetchUserService, loginService } from "api";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
@@ -22,6 +22,8 @@ const useLogin = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema), mode: "onBlur" });
 
+  console.log(loginSchema)
+
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -33,7 +35,7 @@ const useLogin = () => {
       Cookies.set("loginToken", res?.data?.token, { expires: 7 });
       navigate("/");
       setLoading(false);
-      console.log(res)
+      fetchUserService({email:'arnhnpf@gmail.com'});
     } catch (ex) {
       toast.error(ex?.response?.data?.message);
       setLoading(false);
