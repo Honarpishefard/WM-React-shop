@@ -37,8 +37,6 @@ const useLogin = (email) => {
       setLoading(false);
       const user = await fetchUserService({ email });
       setUser(user.user[0]);
-      Cookies.set("_id", user.user[0]._id);
-      // Cookies.set('_id', user)
     } catch (ex) {
       toast.error(ex?.response?.data?.message);
       setLoading(false);

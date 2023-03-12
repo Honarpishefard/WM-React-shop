@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router";
+import { useParams } from "react-router";
 import {
   fetchProductDetailsService,
   fetchProductsService,
@@ -8,14 +8,17 @@ import {
 import { Footer, Header } from "layout";
 import { Skeleton } from "./Skeleton";
 import "./index.css";
-import { Card, CardSkeleton } from "components";
+import { Button, Card, CardSkeleton } from "components";
 import { Link } from "react-router-dom";
+import { Dropdown } from 'flowbite-react';
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const [suggestedproducts, setSuggestedproducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { category, sec, id } = useParams();
+  const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState("");
 
   useEffect(() => {
     fetchProductDetailsService(category, sec, id).then((res) => {
@@ -60,6 +63,41 @@ export const ProductDetails = () => {
             <p className="leading-relaxed font-normal text-lg">
               {product.desc}
             </p>
+            <div className="flex items-center px-6 py-10 justify-around">
+              <div className="flex gap-6 bg-slate-200 w-fit rounded-full items-center">
+                <Button
+                  classes="rounded-0 rounded-tr-lg rounded-br-lg"
+                  onClick={() => {
+                    if (quantity > 1) setQuantity(quantity - 1);
+                  }}
+                >
+                  -
+                </Button>
+                <p>{quantity}</p>
+                <Button
+                  classes="rounded-0 rounded-tl-lg rounded-bl-lg"
+                  onClick={() => {
+                    if (quantity < 20) setQuantity(quantity + 1);
+                  }}
+                >
+                  +
+                </Button>
+              </div>
+              <Dropdown label={size || 'Select Size'} placement="right" inline={true}>
+                <Dropdown.Item onClick={() => setSize("Small")}>
+                  Small
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setSize("Meduim")}>
+                  Medium
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setSize("Large")}>
+                  Large
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setSize("Extra Large")}>
+                  Extra Large
+                </Dropdown.Item>
+              </Dropdown>
+            </div>
           </div>
         </div>
       )}
