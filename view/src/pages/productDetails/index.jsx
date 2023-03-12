@@ -10,7 +10,7 @@ import { Skeleton } from "./Skeleton";
 import "./index.css";
 import { Button, Card, CardSkeleton } from "components";
 import { Link } from "react-router-dom";
-import { Dropdown } from 'flowbite-react';
+import { Dropdown } from "flowbite-react";
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -64,26 +64,11 @@ export const ProductDetails = () => {
               {product.desc}
             </p>
             <div className="flex items-center px-6 py-10 justify-around">
-              <div className="flex gap-6 bg-slate-200 w-fit rounded-full items-center">
-                <Button
-                  classes="rounded-0 rounded-tr-lg rounded-br-lg"
-                  onClick={() => {
-                    if (quantity > 1) setQuantity(quantity - 1);
-                  }}
-                >
-                  -
-                </Button>
-                <p>{quantity}</p>
-                <Button
-                  classes="rounded-0 rounded-tl-lg rounded-bl-lg"
-                  onClick={() => {
-                    if (quantity < 20) setQuantity(quantity + 1);
-                  }}
-                >
-                  +
-                </Button>
-              </div>
-              <Dropdown label={size || 'Select Size'} placement="right" inline={true}>
+              <Dropdown
+                label={size || "Select Size"}
+                placement="right"
+                inline={true}
+              >
                 <Dropdown.Item onClick={() => setSize("Small")}>
                   Small
                 </Dropdown.Item>
@@ -97,6 +82,37 @@ export const ProductDetails = () => {
                   Extra Large
                 </Dropdown.Item>
               </Dropdown>
+              <div className="flex gap-6 bg-slate-100 w-fit rounded-full items-center">
+                <button
+                  className="rounded-0 rounded-tl-full rounded-bl-full w-8 bg-slate-200 py-2"
+                  onClick={() => {
+                    if (quantity > 1) setQuantity(quantity - 1);
+                  }}
+                >
+                  -
+                </button>
+                <p>{quantity}</p>
+                <button
+                  className="rounded-0 rounded-tr-full rounded-br-full w-8 bg-slate-200 py-2"
+                  onClick={() => {
+                    if (quantity < 20) setQuantity(quantity + 1);
+                  }}
+                >
+                  +
+                </button>
+              </div>
+              <Button onClick={() => console.log(size, quantity)}>
+                Add to card{" "}
+                <svg
+                  aria-hidden="true"
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                </svg>
+              </Button>
             </div>
           </div>
         </div>
