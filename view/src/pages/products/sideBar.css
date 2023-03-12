@@ -1,0 +1,7 @@
+.tabs-group>div {
+    width: 100%;
+}
+
+.tabs-group>div>button {
+    border-radius: 1rem;
+}

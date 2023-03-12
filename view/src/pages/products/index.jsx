@@ -32,7 +32,7 @@ export const Products = () => {
     <>
       <Header />
       <div className="flex">
-        <SideBar sec1="coats" sec2="Dresses" />
+        <SideBar sec1="coats" sec2="Dresses" sec3="Bags" />
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-10 justify-center p-8">
           {products?.map((i) =>
             loading ? (
