@@ -1,9 +1,10 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 export const store = createContext({
   products: [],
   setProducts: () => {},
-  user: [],
+  user: Cookies.get("_id") || [],
   setUser: () => {},
 });
 

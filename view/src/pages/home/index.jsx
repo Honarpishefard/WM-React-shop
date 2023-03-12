@@ -45,7 +45,7 @@ export const Home = () => {
           </svg>
         </Link>
       </div>
-      <div className="grid gap-7 justify-center mx-auto mb-14 px-10 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
+      <div className="grid gap-7 justify-center mx-auto mb-14 px-10 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
         {array?.map((i) =>
           loading ? (
             <CardSkeleton key={i._id} />

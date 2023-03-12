@@ -2,7 +2,7 @@ import { Button } from "components";
 
 export const Card = ({ title, newPrice, oldPrice, image }) => {
   return (
-    <div className="w-full h-full justify-between flex flex-col max-w-sm bg-white border border-gray-200 rounded-3xl shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full h-full mx-auto justify-between flex flex-col max-w-sm bg-white border border-gray-200 rounded-3xl shadow dark:bg-gray-800 dark:border-gray-700">
       <img
         className="rounded-tl-3xl rounded-tr-3xl w-full"
         src={image}
