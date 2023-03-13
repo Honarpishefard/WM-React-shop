@@ -7,7 +7,7 @@ import {
 } from "api";
 import { Footer, Header } from "layout";
 import { Skeleton } from "./Skeleton";
-import "./index.css";
+import "../../assets/style/index.css";
 import { Button, Card, CardSkeleton } from "components";
 import { Link } from "react-router-dom";
 import { Dropdown } from "flowbite-react";
@@ -22,6 +22,9 @@ export const ProductDetails = () => {
   const { category, sec, id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState();
+
+  const cookieId = Cookies.get("_id");
+  const token = Cookies.get("loginToken");
 
   useEffect(() => {
     fetchProductDetailsService(category, sec, id).then((res) => {
@@ -106,8 +109,10 @@ export const ProductDetails = () => {
               </div>
               <Button
                 onClick={() => {
+                  if (!token)
+                    return toast.error("please log in to your account first");
                   if (!size) return toast.error("please select the size");
-                  addToCard(product._id, size, quantity, Cookies.get("_id"));
+                  addToCard(product._id, size, quantity, cookieId);
                 }}
               >
                 Add to card{" "}

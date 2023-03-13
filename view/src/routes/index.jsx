@@ -1,4 +1,4 @@
-import { Home, Signup, Login, Products, ProductDetails } from "pages";
+import { Home, Signup, Login, Products, ProductDetails, CardScreen } from "pages";
 
 export const routes = [
   {
@@ -28,5 +28,9 @@ export const routes = [
   {
     path: "products/:category/:sec/:id",
     element: <ProductDetails />,
+  },
+  {
+    path: "/card",
+    element: <CardScreen />,
   },
 ];

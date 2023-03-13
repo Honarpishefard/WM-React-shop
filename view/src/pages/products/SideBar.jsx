@@ -1,5 +1,5 @@
 import { Tabs } from "flowbite-react";
-import "./sideBar.css";
+import "../../assets/style/index.css";
 
 export const SideBar = ({ sec1, sec2, sec3 }) => {
   return (

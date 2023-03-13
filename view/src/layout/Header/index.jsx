@@ -6,15 +6,15 @@ import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { handleLogOut } from "utils/logout";
 import { useContext, useState } from "react";
 import { store } from "context";
-import "./index.css";
+import "../../assets/style/index.css";
 
 export const Header = () => {
   const [token, setToken] = useState(Cookies.get("loginToken"));
   const { user, setUser } = useContext(store);
 
   const str = user?.name;
-  const matches = str?.match(/\b(\w)/g); // ['J','S','O','N']
-  const acronym = matches?.join(""); // JSON
+  const matches = str?.match(/\b(\w)/g);
+  const acronym = matches?.join("");
 
   return (
     <>
@@ -54,7 +54,7 @@ export const Header = () => {
             New Collections
           </Link>
           <Link
-            to="#"
+            to="/card"
             className="flex text-base gap-2 items-center py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
           >
             <svg

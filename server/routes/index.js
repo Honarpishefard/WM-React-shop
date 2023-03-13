@@ -6,5 +6,6 @@ router.post('/login', require('./../controller/auth/login').handleLogin);
 router.post('/users', require('./../controller/users').fetchUser);
 router.get('/products', require('./../controller/products').fetchProducts);
 router.post('/cardDetails', require('./../controller/cardDetails').handleAddToCard);
+router.get('/cardDetails', require('./../controller/cardDetails').handleFetchCards);
 
 module.exports = { router }

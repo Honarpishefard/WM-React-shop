@@ -1,3 +1,11 @@
+.navbar>ul {
+    align-items: center;
+}
+
+.max-h-40rem {
+    max-height: 40rem;
+}
+
 .tabs-group>div {
     width: 100%;
 }
