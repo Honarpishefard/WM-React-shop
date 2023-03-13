@@ -7,14 +7,14 @@ const handleAddToCard = async (req, res) => {
   console.log(userId);
   console.log(productId);
 
-  //   await User.findByIdAndRemove(
-  //     userId,
-  //     { cardProducts: [{ size: size }, { quantity: quantity }] },
-  //     { new: true }
-  //   );
-  //   res.status(200).json({ message: "added to card succesfuly" });
+  await User.findByIdAndUpdate(
+    userId,
+    { cardProducts: {productId, size, quantity} },
+    { new: true }
+  );
+  res.status(200).json({ message: "added to card succesfuly" });
 
-  res.status(200).json({ message: "ok" });
+  //   res.status(200).json({ message: "ok" });
 };
 
 module.exports = { handleAddToCard };
