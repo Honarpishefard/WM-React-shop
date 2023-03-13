@@ -6,7 +6,7 @@ const fetchUser = async (req, res) => {
     const user = await User.find({ email });
     res.status(200).json({ user });
   }
-  if (email && id) {
+  if (id) {
     const user = await User.find({ _id: id });
     res.status(200).json({ user });
   }
