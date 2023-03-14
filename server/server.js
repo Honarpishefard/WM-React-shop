@@ -17,4 +17,7 @@ server.use(express.json({ extended: false }));
 server.use(express.urlencoded({ extended: true }));
 server.use("/api", require("./routes").router);
 server.use("/statics", express.static(appRootPath + "/public"));
-server.use("/api/cardDetails", require("./middlewares/authenticator").authenticator);
+server.use(
+  "/api/cardDetails",
+  require("./middlewares/authenticator").authenticator
+);

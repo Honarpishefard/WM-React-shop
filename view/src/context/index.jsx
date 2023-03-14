@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import { fetchUserService } from 'api';
-import Cookies from 'js-cookie';
+import { fetchUserService } from "api";
+import Cookies from "js-cookie";
 
 export const store = createContext({
   products: [],
@@ -13,10 +13,12 @@ export default function ContextProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState([]);
 
+  const id = Cookies.get("_id");
+
   useEffect(() => {
-    fetchUserService({ id: Cookies.get("_id") }).then((res) =>
-      setUser(res.user[0])
-    );
+    if (id) {
+      fetchUserService({ id }).then((res) => setUser(res.user[0]));
+    }
   }, []);
 
   return (

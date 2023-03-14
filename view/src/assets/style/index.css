@@ -13,3 +13,7 @@
 .tabs-group>div>button {
     border-radius: 1rem;
 }
+
+.h-50vh {
+    height: 50vh;
+}

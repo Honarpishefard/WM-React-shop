@@ -7,7 +7,7 @@ import {
 } from "api";
 import { Footer, Header } from "layout";
 import { Skeleton } from "./Skeleton";
-import "../../assets/style/index.css";
+import "assets/style/index.css";
 import { Button, Card, CardSkeleton } from "components";
 import { Link } from "react-router-dom";
 import { Dropdown } from "flowbite-react";
