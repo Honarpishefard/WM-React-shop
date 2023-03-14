@@ -18,10 +18,20 @@ const handleAddToCard = async (req, res) => {
 const handleFetchCards = async (req, res) => {
   const { userId } = req.body;
 
+  const findProduct = async(_id) => {
+    const data = await Product.findOne({ _id }).exec();
+    return data;
+  };
+
   const user = await User.findById(userId);
   Promise.all(
-    user.cardProducts.map((i) => {
-      return Product.findOne({ _id: i.productId }).exec();
+    user.cardProducts.map(async(i) => {
+      // const data = Product.findOne({ _id: i.productId }).exec();
+      // const info =
+      const data = await findProduct(i.productId);
+      const info = {size: i.size, quantity: i.quantity}
+
+      return [data, info];
     })
   )
     .then((products) => {
