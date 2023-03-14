@@ -5,12 +5,14 @@ import { fetchCardService, mediaURL } from "api";
 import { toast } from "react-toastify";
 import "assets/style/index.css";
 import { BasketProducts } from "components";
+import { useNavigate } from "react-router";
 
 export const CardScreen = () => {
   const token = Cookies.get("loginToken");
   const [empty, setEmpty] = useState();
   const userId = Cookies.get("_id");
   const [cardProducts, setCardProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!token) {
@@ -32,6 +34,7 @@ export const CardScreen = () => {
           <div className="flex-grow flex flex-col gap-5">
             {cardProducts?.map((i) => (
               <BasketProducts
+                onClick={() => navigate(`/products/${i[0].category[0]}/${i[0].category[1]}/${i[0]._id}`)}
                 title={i[0].title}
                 price={i[0].newPrice}
                 image={mediaURL + i[0].image}
@@ -40,7 +43,7 @@ export const CardScreen = () => {
               />
             ))}
           </div>
-          <div className="py-3 px-12 min-w-max bg-white border border-gray-200 rounded-3xl overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700">
+          <div className="py-5 px-12 min-w-max bg-white border border-gray-200 rounded-3xl overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700">
             <p>side bar placeholder</p>
           </div>
         </div>
