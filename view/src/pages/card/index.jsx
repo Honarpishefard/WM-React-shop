@@ -26,7 +26,7 @@ export const CardScreen = () => {
         setCardProducts(res.data.data);
       });
     }
-  }, [token, cardProducts]);
+  }, [token, cardProducts.length]);
 
   return (
     <>
@@ -42,7 +42,7 @@ export const CardScreen = () => {
                     `/products/${i[0].category[0]}/${i[0].category[1]}/${i[0]._id}`
                   )
                 }
-                id={i[0]._id}
+                productId={i[0]._id}
                 title={i[0].title}
                 price={i[0].newPrice}
                 image={mediaURL + i[0].image}

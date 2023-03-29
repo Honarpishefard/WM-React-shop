@@ -13,6 +13,11 @@ export const addToCardService = (productId, size, quantity, userId) => {
   });
 };
 
-export const removeFromCardService = (data) => {
-  return mainInstance.post("/cardDetails/removeFromCard", { id: data });
+export const removeFromCardService = (userId, productId, size, quantity) => {
+  return mainInstance.post("/cardDetails/removeFromCard", {
+    userId,
+    productId,
+    size,
+    quantity,
+  });
 };

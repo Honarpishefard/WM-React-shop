@@ -41,15 +41,15 @@ const handleAddToCard = async (req, res) => {
 };
 
 const handleRemoveFromCard = async (req, res) => {
-  const { id } = req.body;
-  // User.cardProducts.findByIdAndDelete({ productId: id });
-  // User.cardProducts.findByIdAndRemove({ productId: id });
+  const { userId, productId, size, quantity } = req.body;
 
-  // await User.findByIdAndUpdate(
-  //   { _id: "640f51e2826fc2c0f0db5b63" },
-  //   { $unset: { cardProducts: { productId: id } } },
-  // );
-
+  await User.findByIdAndUpdate(userId, {
+    $pull: { cardProducts: { productId, size, quantity } },
+  })
+    .then(() => {
+      res.status(200).json({ message: "removed from card succesfuly" });
+    })
+    .catch((ex) => res.status(400).json({ message: ex }));
 };
 
 module.exports = { handleAddToCard, handleFetchCards, handleRemoveFromCard };

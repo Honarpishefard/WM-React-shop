@@ -1,5 +1,6 @@
 import { removeFromCardService } from "api";
 import { Button } from "components";
+import Cookies from "js-cookie";
 
 export const BasketProducts = ({
   title,
@@ -8,10 +9,12 @@ export const BasketProducts = ({
   quantity,
   image,
   onClick,
-  id,
+  productId,
 }) => {
   const newPrice = price.replaceAll("$", "");
   const calc = quantity * newPrice;
+
+  const userId = Cookies.get("_id");
 
   return (
     <div className="flex items-center bg-white border border-gray-200 rounded-3xl overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700">
@@ -32,7 +35,7 @@ export const BasketProducts = ({
       </div>
       <Button
         classes="mx-6 mb-6 self-end"
-        onClick={() => removeFromCardService(id)}
+        onClick={() => removeFromCardService(userId, productId, size, quantity)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
