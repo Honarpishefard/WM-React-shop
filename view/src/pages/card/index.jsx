@@ -15,16 +15,18 @@ export const CardScreen = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    cardProducts.length == 0 ? setEmpty(true) : setEmpty(false);
     if (!token) {
       setEmpty(true);
       toast.error("Please log in to your account first", {
         toastId: "empty card",
       });
     } else {
-      fetchCardService(userId).then((res) => setCardProducts(res.data.data));
-      setEmpty(false);
+      fetchCardService(userId).then((res) => {
+        setCardProducts(res.data.data);
+      });
     }
-  }, [token]);
+  }, [token, cardProducts]);
 
   return (
     <>
@@ -34,7 +36,13 @@ export const CardScreen = () => {
           <div className="flex-grow flex flex-col gap-5">
             {cardProducts?.map((i) => (
               <BasketProducts
-                onClick={() => navigate(`/products/${i[0].category[0]}/${i[0].category[1]}/${i[0]._id}`)}
+                key={`${i[0]._id}&${i[1].size}&${i[1].quantity}`}
+                onClick={() =>
+                  navigate(
+                    `/products/${i[0].category[0]}/${i[0].category[1]}/${i[0]._id}`
+                  )
+                }
+                id={i[0]._id}
                 title={i[0].title}
                 price={i[0].newPrice}
                 image={mediaURL + i[0].image}

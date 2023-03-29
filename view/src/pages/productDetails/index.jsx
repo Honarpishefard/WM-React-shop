@@ -42,6 +42,13 @@ export const ProductDetails = () => {
     });
   }, [category, sec, id]);
 
+  const handleAddToCard = () => {
+    if (!token) return toast.error("please log in to your account first");
+    if (!size) return toast.error("please select the size");
+    addToCard(product._id, size, quantity, cookieId);
+    toast.success("Item added to your card successfully");
+  };
+
   return (
     <>
       <Header />
@@ -107,14 +114,7 @@ export const ProductDetails = () => {
                   +
                 </button>
               </div>
-              <Button
-                onClick={() => {
-                  if (!token)
-                    return toast.error("please log in to your account first");
-                  if (!size) return toast.error("please select the size");
-                  addToCard(product._id, size, quantity, cookieId);
-                }}
-              >
+              <Button onClick={() => handleAddToCard()}>
                 Add to card{" "}
                 <svg
                   aria-hidden="true"

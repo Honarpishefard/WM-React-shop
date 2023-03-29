@@ -1,3 +1,4 @@
+import { removeFromCardService } from "api";
 import { Button } from "components";
 
 export const BasketProducts = ({
@@ -7,16 +8,14 @@ export const BasketProducts = ({
   quantity,
   image,
   onClick,
+  id,
 }) => {
   const newPrice = price.replaceAll("$", "");
   const calc = quantity * newPrice;
 
   return (
-    <div
-      onClick={onClick}
-      className="flex items-center bg-white border border-gray-200 rounded-3xl overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700"
-    >
-      <div className="flex gap-5 flex-grow">
+    <div className="flex items-center bg-white border border-gray-200 rounded-3xl overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700">
+      <div onClick={onClick} className="flex gap-5 flex-grow">
         <img src={image} className="max-h-60" alt="" />
         <div className="p-5 flex flex-col gap-2 justify-center">
           <p className="font-semibold text-lg">{title}</p>
@@ -31,7 +30,10 @@ export const BasketProducts = ({
           </p>
         </div>
       </div>
-      <Button classes="mx-6 mb-6 self-end">
+      <Button
+        classes="mx-6 mb-6 self-end"
+        onClick={() => removeFromCardService(id)}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"

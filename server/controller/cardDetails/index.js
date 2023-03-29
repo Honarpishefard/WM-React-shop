@@ -1,6 +1,31 @@
 const { User } = require("../../model/User");
 const { Product } = require("../../model/product");
 
+const handleFetchCards = async (req, res) => {
+  const { userId } = req.body;
+
+  const findProduct = async (_id) => {
+    const data = await Product.findOne({ _id }).exec();
+    return data;
+  };
+
+  const user = await User.findById(userId);
+  Promise.all(
+    user.cardProducts.map(async (i) => {
+      const data = await findProduct(i.productId);
+      const info = { size: i.size, quantity: i.quantity };
+
+      return [data, info];
+    })
+  )
+    .then((products) => {
+      res.status(200).json({ data: products });
+    })
+    .catch((err) => {
+      res.status(404).json({ message: "something went wrong" });
+    });
+};
+
 const handleAddToCard = async (req, res) => {
   const { productId, size, quantity, userId } = req.body;
 
@@ -15,31 +40,16 @@ const handleAddToCard = async (req, res) => {
     .catch((ex) => res.status(400).json({ message: ex }));
 };
 
-const handleFetchCards = async (req, res) => {
-  const { userId } = req.body;
+const handleRemoveFromCard = async (req, res) => {
+  const { id } = req.body;
+  // User.cardProducts.findByIdAndDelete({ productId: id });
+  // User.cardProducts.findByIdAndRemove({ productId: id });
 
-  const findProduct = async(_id) => {
-    const data = await Product.findOne({ _id }).exec();
-    return data;
-  };
+  // await User.findByIdAndUpdate(
+  //   { _id: "640f51e2826fc2c0f0db5b63" },
+  //   { $unset: { cardProducts: { productId: id } } },
+  // );
 
-  const user = await User.findById(userId);
-  Promise.all(
-    user.cardProducts.map(async(i) => {
-      // const data = Product.findOne({ _id: i.productId }).exec();
-      // const info =
-      const data = await findProduct(i.productId);
-      const info = {size: i.size, quantity: i.quantity}
-
-      return [data, info];
-    })
-  )
-    .then((products) => {
-      res.status(200).json({ data: products });
-    })
-    .catch((err) => {
-      res.status(404).json({ message: "something went wrong" });
-    });
 };
 
-module.exports = { handleAddToCard, handleFetchCards };
+module.exports = { handleAddToCard, handleFetchCards, handleRemoveFromCard };
