@@ -41,7 +41,8 @@ const handleAddToCard = async (req, res) => {
 };
 
 const handleRemoveFromCard = async (req, res) => {
-  const { userId, productId, size, quantity } = req.body;
+  const { userId } = req.body;
+  const { productId, size, quantity } = req.body.productId;
 
   await User.findByIdAndUpdate(userId, {
     $pull: { cardProducts: { productId, size, quantity } },

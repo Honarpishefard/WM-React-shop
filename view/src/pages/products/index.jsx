@@ -38,17 +38,14 @@ export const Products = () => {
             loading ? (
               <CardSkeleton key={i._id} />
             ) : (
-              <div
+              <Card
                 onClick={() => handleNav(i._id, i.category[0], i.category[1])}
                 key={i._id}
-              >
-                <Card
-                  title={i.title}
-                  newPrice={i.newPrice}
-                  oldPrice={i.oldPrice}
-                  image={mediaURL + i.image}
-                />
-              </div>
+                title={i.title}
+                newPrice={i.newPrice}
+                oldPrice={i.oldPrice}
+                image={mediaURL + i.image}
+              />
             )
           )}
         </div>
