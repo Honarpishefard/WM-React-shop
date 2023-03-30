@@ -1,13 +1,9 @@
 import { Button } from "components";
 import { Modal } from "flowbite-react";
 import React, { useState } from "react";
-import { removeFromCardService } from "api";
-import Cookies from "js-cookie";
 
-export const ModalComponent = (ProductId, size, quantity, Click) => {
+export const ModalComponent = ({ onClick }) => {
   const [visible, setVisible] = useState(false);
-
-  const userId = Cookies.get("_id");
 
   return (
     <React.Fragment>
@@ -48,12 +44,8 @@ export const ModalComponent = (ProductId, size, quantity, Click) => {
             </h3>
             <div className="flex justify-center gap-4">
               <button
-                // onClick={Click}
+                onClick={onClick}
                 className="bg-red-700 text-white px-3 py-1 rounded-md"
-                onClick={() => {
-                  setVisible(false);
-                  removeFromCardService(userId, ProductId, size, quantity);
-                }}
               >
                 Yes, I'm sure
               </button>
