@@ -14,10 +14,10 @@ export const Card = ({ title, newPrice, oldPrice, image, onClick, children }) =>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 flex-wrap justify-center">
               <span className="text-xl font-bold text-gray-900 dark:text-white">
-                {newPrice}
+                ${newPrice}
               </span>
               <span className="text-base font-bold text-gray-500 line-through dark:text-white">
-                {oldPrice}
+                ${oldPrice}
               </span>
             </div>
           </div>

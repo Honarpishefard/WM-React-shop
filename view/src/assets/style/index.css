@@ -6,6 +6,10 @@
     max-height: 40rem;
 }
 
+.min-w-25{
+    min-width: 25%;
+}
+
 .tabs-group>div {
     width: 100%;
 }

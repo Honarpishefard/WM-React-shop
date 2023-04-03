@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { BasketProducts, ModalComponent } from "components";
 import { useNavigate } from "react-router";
 import "assets/style/index.css";
+import { SideBar } from "./SideBar";
 
 export const CardScreen = () => {
   const token = Cookies.get("loginToken");
@@ -15,6 +16,7 @@ export const CardScreen = () => {
   const [empty, setEmpty] = useState();
   const [removed, setRemoved] = useState(false);
   const [cardProducts, setCardProducts] = useState([]);
+  const [totalPrice, setTotalPrice] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +29,11 @@ export const CardScreen = () => {
     } else {
       fetchCardService(userId).then((res) => {
         setCardProducts(res.data.data);
+        res.data.data.map((i) => {
+          if (!totalPrice.includes(i[0].newPrice * i[1].quantity))
+            totalPrice.push(i[0].newPrice * i[1].quantity);
+        });
+        setTotalPrice(totalPrice.reduce((partialSum, a) => partialSum + a, 0));
       });
     }
   }, [token, cardProducts.length, removed]);
@@ -96,8 +103,8 @@ export const CardScreen = () => {
               </BasketProducts>
             ))}
           </div>
-          <div className="py-5 px-12 min-w-max bg-white border border-gray-200 rounded-3xl overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700">
-            <p>side bar placeholder</p>
+          <div className=" min-w-25">
+            <SideBar totalPrice={totalPrice} />
           </div>
         </div>
       ) : (

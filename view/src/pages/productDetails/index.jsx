@@ -58,10 +58,10 @@ export const ProductDetails = () => {
             </p>
             <div className="flex gap-6 items-center py-5">
               <p className="text-2xl text-gray-900 dark:text-white font-medium">
-                {product.newPrice}
+                ${product.newPrice}
               </p>
               <p className="text-xl text-gray-500 line-through dark:text-white font-medium">
-                {product.oldPrice}
+                ${product.oldPrice}
               </p>
             </div>
             <p className="leading-relaxed font-normal text-lg">
