@@ -6,6 +6,8 @@ import { Footer, Header } from "layout";
 import { SideBar } from "./SideBar";
 import { store } from "context";
 import { Dropdown } from "flowbite-react";
+import { handleAddToCard } from "utils/addToCard";
+import Cookies from "js-cookie";
 
 export const Products = () => {
   const { products, setProducts } = useContext(store);
@@ -15,6 +17,8 @@ export const Products = () => {
   const [loading, setLoading] = useState(true);
   const [size, setSize] = useState();
   const [quantity, setQuantity] = useState(1);
+
+  const cookieId = Cookies.get("_id");
 
   useEffect(() => {
     fetchProductsService(category || "").then((res) => {
@@ -50,6 +54,10 @@ export const Products = () => {
                 image={mediaURL + i.image}
               >
                 <ModalComponent
+                  onClick={() => {
+                    handleAddToCard(i._id, size, quantity, cookieId);
+                    // setVisible(false);
+                  }}
                   submit="Add"
                   cancel="Cancel"
                   classes="bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl"

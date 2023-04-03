@@ -23,6 +23,7 @@ export const ModalComponent = ({ cancel, submit, onClick, svg, classes, children
             <div className="flex justify-center gap-4">
               <button
                 onClick={onClick}
+                onClickCapture={() => setVisible(false)}
                 className={`text-white px-3 py-1 rounded-md ${classes}`}
               >
                 {submit}

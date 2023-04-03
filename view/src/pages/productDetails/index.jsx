@@ -11,8 +11,7 @@ import "assets/style/index.css";
 import { Button, Card, CardSkeleton } from "components";
 import { Link } from "react-router-dom";
 import { Dropdown } from "flowbite-react";
-import { addToCard } from "utils/addToCard";
-import { toast } from "react-toastify";
+import { handleAddToCard } from "utils/addToCard";
 import Cookies from "js-cookie";
 
 export const ProductDetails = () => {
@@ -24,7 +23,6 @@ export const ProductDetails = () => {
   const [size, setSize] = useState();
 
   const cookieId = Cookies.get("_id");
-  const token = Cookies.get("loginToken");
 
   useEffect(() => {
     fetchProductDetailsService(category, sec, id).then((res) => {
@@ -41,13 +39,6 @@ export const ProductDetails = () => {
       });
     });
   }, [category, sec, id]);
-
-  const handleAddToCard = () => {
-    if (!token) return toast.error("please log in to your account first");
-    if (!size) return toast.error("please select the size");
-    addToCard(product._id, size, quantity, cookieId);
-    toast.success("Item added to your card successfully");
-  };
 
   return (
     <>
@@ -114,7 +105,7 @@ export const ProductDetails = () => {
                   +
                 </button>
               </div>
-              <Button onClick={() => handleAddToCard()}>
+              <Button onClick={() => handleAddToCard(product._id, size, quantity, cookieId)}>
                 Add to card{" "}
                 <svg
                   aria-hidden="true"
