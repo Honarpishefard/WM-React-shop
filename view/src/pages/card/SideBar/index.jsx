@@ -6,16 +6,24 @@ import { toast } from "react-toastify";
 export const SideBar = ({ totalPrice }) => {
   const [discount, setDiscount] = useState(false);
   const [code, setCode] = useState(false);
-
-//   discountCodes.map((i) => console.log(i.code));
+  const [discountPercent, setDiscountPercent] = useState("");
 
   const checkDiscountCode = () => {
     if (!code) return toast.error("Enter a discount code before submitting");
-    if (discountCodes.includes(code)) {
-      setDiscount(true);
-      return console.log("ok");
+    let codes = [];
+    discountCodes.map((i) => {
+      codes.push(i.code);
+    });
+    if (codes.includes(code)) {
+      discountCodes.filter((i) =>
+        i.code === code ? setDiscountPercent(i.discount) : null
+      );
+      return setDiscount(true);
     }
-    toast.error("This code is not valid");
+    setDiscount(false);
+    toast.error("This code is not valid", {
+      toastId: "Invalid card",
+    });
   };
 
   return (
@@ -34,12 +42,23 @@ export const SideBar = ({ totalPrice }) => {
           <p className="flex w-full justify-between text-gray-500 font-normal">
             Discount:{" "}
             <span className="text-black font-semibold">
-              {discount ? "20%" : "-"}
+              {discount ? `${discountPercent}%` : "-"}
             </span>
           </p>
           <p className="flex w-full justify-between text-gray-500 font-normal">
             Total cost:{" "}
-            <span className="text-black font-semibold">$ {totalPrice}</span>
+            <span className="text-black font-semibold flex flex-col items-center">
+              {discount ? (
+                <div className="flex  flex-col items-end">
+                  <p className="text-gray-500 font-normal line-through">{`$ ${totalPrice}`}</p>
+                  <p>{`$ ${
+                    totalPrice - (totalPrice * discountPercent) / 100
+                  }`}</p>
+                </div>
+              ) : (
+                <p className="">{`$ ${totalPrice}`}</p>
+              )}
+            </span>
           </p>
         </div>
       </div>
@@ -53,10 +72,11 @@ export const SideBar = ({ totalPrice }) => {
         >
           <TextField
             onChange={(event) => setCode(event.target.value)}
-            label="Enter code here:"
+            label="Enter it here:"
             htmlFor="discountCode"
             id="discountCode"
           />
+          <p className="text-gray-400 font-light text-sm mb-6">Try "BLACKFRIDAY" or "HAPPYNEWYEAR"</p>
           <Button classes="justify-center">Submit code</Button>
         </form>
       </div>

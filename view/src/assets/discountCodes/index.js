@@ -1,4 +1,4 @@
 export const discountCodes = [
-  { code: "test1", discount: "15%" },
-  { code: "test2", discount: "20%" },
+  { code: "BLACKFRIDAY", discount: 15 },
+  { code: "HAPPYNEWYEAR", discount: 20 },
 ];
