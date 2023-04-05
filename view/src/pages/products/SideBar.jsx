@@ -1,26 +1,28 @@
-import { Tabs } from "flowbite-react";
-import "assets/style/index.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { store } from "context";
+import "assets/style/index.css";
 
 export const SideBar = ({ sections }) => {
   const { products, setProducts } = useContext(store);
-  // products.filter((i) => (i.category[1] === sec1 ? console.log(i) : null));
-  
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  // console.log(filteredProducts);
+
   return (
-    <Tabs.Group
-      aria-label="Default tabs"
-      style="default"
-      className="flex gap-2 flex-col w-1/4 mx-auto tabs-group px-6 py-4"
-    >
+    <div className="px-10 py-9 mb-10 flex flex-col gap-5 border-r">
       {sections.map((i) => (
-        <Tabs.Item
-          onClick={() => console.log("first")}
-          color="red"
-          active={true}
-          title={i}
-        ></Tabs.Item>
+        <div className="bg-indigo-50 rounded-2xl py-3 px-12"
+          onClick={() => {
+            products.filter((item) => {
+              item.category[1] === i ? filteredProducts.push(item) : null;
+              setProducts(filteredProducts);
+            });
+          }}
+          key={i}
+        >
+          {i}
+        </div>
       ))}
-    </Tabs.Group>
+    </div>
   );
 };

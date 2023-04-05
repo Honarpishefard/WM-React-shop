@@ -40,7 +40,7 @@ export const Products = () => {
       <Header />
       <div className="flex">
         {category === "men" ? (
-          <SideBar sections={["jacket", "shoes", "Tshirt"]} />
+          <SideBar sections={["jacket", "shoes", "tshirt"]} />
         ) : (
           <SideBar sections={["coat", "dress"]} />
         )}
