@@ -39,7 +39,11 @@ export const Products = () => {
     <>
       <Header />
       <div className="flex">
-        <SideBar sec1="coats" sec2="Dresses" sec3="Bags" />
+        {category === "men" ? (
+          <SideBar sections={["jacket", "shoes", "Tshirt"]} />
+        ) : (
+          <SideBar sections={["coat", "dress"]} />
+        )}
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-10 justify-center p-8">
           {products?.map((i) =>
             loading ? (
@@ -56,7 +60,6 @@ export const Products = () => {
                 <ModalComponent
                   onClick={() => {
                     handleAddToCard(i._id, size, quantity, cookieId);
-                    // setVisible(false);
                   }}
                   submit="Add"
                   cancel="Cancel"

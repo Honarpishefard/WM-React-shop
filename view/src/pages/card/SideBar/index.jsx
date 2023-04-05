@@ -77,7 +77,7 @@ export const SideBar = ({ totalPrice }) => {
             id="discountCode"
           />
           <p className="text-gray-400 font-light text-sm mb-6">Try "BLACKFRIDAY" or "HAPPYNEWYEAR"</p>
-          <Button classes="justify-center">Submit code</Button>
+          <Button classes="justify-center w-full">Submit code</Button>
         </form>
       </div>
     </div>
