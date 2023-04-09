@@ -55,8 +55,7 @@ export const Products = () => {
                 title={i.title}
                 newPrice={i.newPrice}
                 oldPrice={i.oldPrice}
-                image={mediaURL + i.image}
-              >
+                image={mediaURL + i.image}>
                 <ModalComponent
                   onClick={() => {
                     handleAddToCard(i._id, size, quantity, cookieId);

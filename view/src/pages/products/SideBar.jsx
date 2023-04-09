@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { store } from "context";
 import "assets/style/index.css";
 import { useParams } from "react-router";
