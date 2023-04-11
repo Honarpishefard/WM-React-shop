@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "assets/images/headerLogo.jpg";
 import Cookies from "js-cookie";
 import { Button } from "components";
@@ -7,14 +7,12 @@ import { handleLogOut } from "utils/logout";
 import { useContext, useState } from "react";
 import { store } from "context";
 import "assets/style/index.css";
+import { acronym } from "utils/acronym";
 
 export const Header = () => {
   const [token, setToken] = useState(Cookies.get("loginToken"));
   const { user, setUser } = useContext(store);
-
-  const str = user?.name;
-  const matches = str?.match(/\b(\w)/g);
-  const acronym = matches?.join("");
+  const navigate = useNavigate();
 
   return (
     <>
@@ -69,12 +67,17 @@ export const Header = () => {
             Card
           </Link>
         </Navbar.Collapse>
-        {token ? (
+        {token && user ? (
           <div className="flex md:order-2">
             <Dropdown
               arrowIcon={false}
               inline={true}
-              label={<Avatar className="px-2" placeholderInitials={acronym} />}
+              label={
+                <Avatar
+                  className="px-2"
+                  placeholderInitials={acronym(user?.name)}
+                />
+              }
             >
               <Dropdown.Header>
                 <span className="block text-sm">{user.name}</span>
@@ -82,7 +85,9 @@ export const Header = () => {
                   {user.email}
                 </span>
               </Dropdown.Header>
-              <Dropdown.Item>Dashboard</Dropdown.Item>
+              <Dropdown.Item onClick={() => navigate("/dashboard")}>
+                Dashboard
+              </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item
                 onClick={() => {

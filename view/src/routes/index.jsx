@@ -1,4 +1,12 @@
-import { Home, Signup, Login, Products, ProductDetails, CardScreen } from "pages";
+import {
+  Home,
+  Signup,
+  Login,
+  Products,
+  ProductDetails,
+  CardScreen,
+  Dashboard,
+} from "pages";
 
 export const routes = [
   {
@@ -32,5 +40,9 @@ export const routes = [
   {
     path: "/card",
     element: <CardScreen />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
   },
 ];
