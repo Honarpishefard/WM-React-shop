@@ -1,4 +1,4 @@
-export const FileInput = () => {
+export const FileInput = ({onChange}) => {
   return (
     <div className="flex items-center justify-center w-3/4 py-8">
       <label
@@ -25,10 +25,10 @@ export const FileInput = () => {
             <span className="font-semibold">Click to upload</span> or drag and drop
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            SVG, PNG, JPG or GIF (MAX. 800x400px)
+            SVG, PNG or JPG (MAX. 800x400px)
           </p>
         </div>
-        <input id="dropzone-file" type="file" className="hidden" />
+        <input id="dropzone-file" type="file" className="hidden" onChange={onChange}/>
       </label>
     </div>
   );

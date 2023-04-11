@@ -1,18 +1,29 @@
 import { AccordionComponent, Button, FileInput, TextField } from "components";
 import { store } from "context";
 import { Header } from "layout";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { acronym } from "utils/acronym";
 
 export const Dashboard = () => {
   const { user, setUser } = useContext(store);
+
+  const [imgfile, uploadimg] = useState([]);
+
+  const imgFilehandler = (e) => {
+    if (e.target.files.length !== 0) {
+      uploadimg((imgfile) => [
+        ...imgfile,
+        URL.createObjectURL(e.target.files[0]),
+      ]);
+    }
+  };
 
   return (
     <>
       <Header />
       <div className="flex flex-col items-center py-12 px-8">
         <div className="flex flex-col items-center">
-          <div className="bg-gray-200 rounded-full w-40 h-40 flex justify-center items-center">
+          <div className="bg-gradient-to-br from-green-300 to-blue-400 hover:bg-gradient-to-bl rounded-full w-40 h-40 flex justify-center items-center">
             <p className="text-gray-800 font-light text-6xl">
               {acronym(user?.name)}
             </p>
@@ -54,7 +65,22 @@ export const Dashboard = () => {
             title="Change your profile photo"
             className="w-full flex flex-col items-center  pt-6"
           >
-            <FileInput />
+            <FileInput onChange={imgFilehandler} />
+            {imgfile?.map((img) => {
+              return (
+                <>
+                  <p className="font-normal text-lg">Preview:</p>
+                  <span className="py-4" key={img}>
+                    <img
+                      src={img}
+                      className="max-w-md h-auto"
+                      alt="profile image"
+                    />
+                  </span>
+                  <Button classes="my-5 w-1/4 justify-center">Save</Button>
+                </>
+              );
+            })}
           </div>
           <div title="Change password">
             <TextField
@@ -76,9 +102,9 @@ export const Dashboard = () => {
               type="password"
               htmlFor="repeatNewPassword"
               id="repeatNewPassword"
-              placeholder="Repeat password..."
+              placeholder="repeat password..."
             />
-            <Button>Save</Button>
+            <Button classes='mx-auto w-1/4 justify-center'>Save</Button>
           </div>
         </AccordionComponent>
       </div>
