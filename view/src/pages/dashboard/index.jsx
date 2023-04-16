@@ -3,34 +3,14 @@ import { store } from "context";
 import { Header } from "layout";
 import { useContext, useState } from "react";
 import { acronym } from "utils/acronym";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { changeUserInfoService } from "api";
 
-const dashboardSchema = yup
-  .object({
-    name: yup.string(),
-    email: yup.string(),
-    currentPassword: yup.string(),
-    newPassword: yup.string(),
-    repeatNewPassword: yup.string(),
-  })
-  .required();
-
+import useDashboard from "./useDashboard";
 export const Dashboard = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(dashboardSchema) });
+  const { onRegister, handleSubmit, register, loading } = useDashboard();
 
   const { user, setUser } = useContext(store);
-
   const [imgfile, uploadimg] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [inputValue, setInputValue] = useState('');
 
   const imgFilehandler = (e) => {
     if (e.target.files.length !== 0) {
@@ -38,42 +18,6 @@ export const Dashboard = () => {
         ...imgfile,
         URL.createObjectURL(e.target.files[0]),
       ]);
-    }
-  };
-
-  const onRegister = async (data, e) => {
-    setLoading(true);
-    switch (e.target.id) {
-      case "name":
-        if (!data.name) return toast.error("No new name entered !");
-        try {
-          const res = await changeUserInfoService({
-            id: user._id,
-            name: data?.name,
-          });
-          toast.success(res?.message);
-          setUser(res?.user);
-          setLoading(false);
-        } catch (ex) {
-          toast.error(ex?.response?.data?.message);
-          setLoading(false);
-        }
-        break;
-      case "email":
-        if (!data.email) return toast.error("No new email entered !");
-        try {
-          const ress = await changeUserInfoService({
-            id: user._id,
-            email: data?.email,
-          });
-          toast.success(ress?.message);
-          setUser(ress?.user);
-          setLoading(false);
-        } catch (ex) {
-          toast.error(ex?.response?.data?.message);
-          setLoading(false);
-        }
-        break;
     }
   };
 
@@ -105,11 +49,13 @@ export const Dashboard = () => {
                 type="text"
                 htmlFor="name"
                 id="name"
+                value={inputValue}
+                onChange={(e)=> setInputValue(e.target.value)}
                 placeholder="Your name..."
                 validation={{ ...register("name") }}
               />
             </div>
-            <Button loading={loading}>Save</Button>
+            <Button onClick={() => setInputValue('')} loading={loading}>Save</Button>
           </form>
           <form
             id="email"
@@ -123,11 +69,13 @@ export const Dashboard = () => {
                 type="email"
                 htmlFor="email"
                 id="email"
+                value={inputValue}
+                onChange={(e)=> setInputValue(e.target.value)}
                 placeholder="Your email..."
                 validation={{ ...register("email") }}
               />
             </div>
-            <Button loading={loading}>Save</Button>
+            <Button onClick={() => setInputValue('')} loading={loading}>Save</Button>
           </form>
           <div
             title="Change your profile photo"
@@ -152,13 +100,19 @@ export const Dashboard = () => {
               );
             })}
           </div>
-          <div title="Change password">
+          <form
+            id="password"
+            onSubmit={handleSubmit(onRegister)}
+            title="Change password"
+          >
             <TextField
               label="Current password"
               type="password"
               htmlFor="currentPassword"
               id="currentPassword"
               placeholder="current password..."
+              value={inputValue}
+              onChange={(e)=> setInputValue(e.target.value)}
               validation={{ ...register("currentPassword") }}
             />
             <TextField
@@ -167,6 +121,8 @@ export const Dashboard = () => {
               htmlFor="newPassword"
               id="newPassword"
               placeholder="new password..."
+              value={inputValue}
+              onChange={(e)=> setInputValue(e.target.value)}
               validation={{ ...register("newPassword") }}
             />
             <TextField
@@ -180,7 +136,7 @@ export const Dashboard = () => {
             <Button loading={loading} classes="mx-auto w-1/4 justify-center">
               Save
             </Button>
-          </div>
+          </form>
         </AccordionComponent>
       </div>
     </>
