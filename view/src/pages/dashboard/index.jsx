@@ -10,7 +10,6 @@ export const Dashboard = () => {
 
   const { user, setUser } = useContext(store);
   const [imgfile, uploadimg] = useState([]);
-  const [inputValue, setInputValue] = useState('');
 
   const imgFilehandler = (e) => {
     if (e.target.files.length !== 0) {
@@ -40,6 +39,10 @@ export const Dashboard = () => {
           <form
             id="name"
             onSubmit={handleSubmit(onRegister)}
+            onSubmitCapture={(e) => {
+              e.preventDefault();
+              e.target.reset();
+            }}
             className="flex items-center gap-7"
             title="Change your display name"
           >
@@ -49,17 +52,19 @@ export const Dashboard = () => {
                 type="text"
                 htmlFor="name"
                 id="name"
-                value={inputValue}
-                onChange={(e)=> setInputValue(e.target.value)}
                 placeholder="Your name..."
                 validation={{ ...register("name") }}
               />
             </div>
-            <Button onClick={() => setInputValue('')} loading={loading}>Save</Button>
+            <Button loading={loading}>Save</Button>
           </form>
           <form
             id="email"
             onSubmit={handleSubmit(onRegister)}
+            onSubmitCapture={(e) => {
+              e.preventDefault();
+              e.target.reset();
+            }}
             className="flex items-center gap-7"
             title="Change email"
           >
@@ -69,13 +74,11 @@ export const Dashboard = () => {
                 type="email"
                 htmlFor="email"
                 id="email"
-                value={inputValue}
-                onChange={(e)=> setInputValue(e.target.value)}
                 placeholder="Your email..."
                 validation={{ ...register("email") }}
               />
             </div>
-            <Button onClick={() => setInputValue('')} loading={loading}>Save</Button>
+            <Button loading={loading}>Save</Button>
           </form>
           <div
             title="Change your profile photo"
@@ -103,6 +106,10 @@ export const Dashboard = () => {
           <form
             id="password"
             onSubmit={handleSubmit(onRegister)}
+            onSubmitCapture={(e) => {
+              e.preventDefault();
+              e.target.reset();
+            }}
             title="Change password"
           >
             <TextField
@@ -111,8 +118,6 @@ export const Dashboard = () => {
               htmlFor="currentPassword"
               id="currentPassword"
               placeholder="current password..."
-              value={inputValue}
-              onChange={(e)=> setInputValue(e.target.value)}
               validation={{ ...register("currentPassword") }}
             />
             <TextField
@@ -121,8 +126,6 @@ export const Dashboard = () => {
               htmlFor="newPassword"
               id="newPassword"
               placeholder="new password..."
-              value={inputValue}
-              onChange={(e)=> setInputValue(e.target.value)}
               validation={{ ...register("newPassword") }}
             />
             <TextField

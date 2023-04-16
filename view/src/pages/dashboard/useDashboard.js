@@ -28,10 +28,10 @@ const useDashboard = () => {
   const { user, setUser } = useContext(store);
 
   const onRegister = async (data, e) => {
-    // console.log(data);
+    console.log(data);
     switch (e.target.id) {
       case "name":
-        if (!data.name) return toast.error("No new name entered !");
+        if (!data.name) return toast.error("No new name entered");
         setLoading(true);
         try {
           const res = await changeUserInfoService({
@@ -47,15 +47,33 @@ const useDashboard = () => {
         }
         break;
       case "email":
-        if (!data.email) return toast.error("No new email entered !");
+        if (!data.email) return toast.error("No new email entered");
         setLoading(true);
         try {
-          const ress = await changeUserInfoService({
+          const res = await changeUserInfoService({
             id: user._id,
             email: data?.email,
           });
-          toast.success(ress?.message);
-          setUser(ress?.user);
+          toast.success(res?.message);
+          setUser(res?.user);
+          setLoading(false);
+        } catch (ex) {
+          toast.error(ex?.response?.data?.message);
+          setLoading(false);
+        }
+        break;
+      case "password":
+        if (!data.currentPassword) return toast.error("Enter your current password");
+        if (!data.newPassword) return toast.error("Enter a new password");
+        if (data?.newPassword !== data?.repeatNewPassword) return toast.error("The passwords don't match");
+        setLoading(true);
+        try {
+          const res = await changeUserInfoService({
+            id: user._id,
+            currentPassword: data?.currentPassword,
+            newPassword: data?.newPassword,
+          });
+          toast.success(res?.message);
           setLoading(false);
         } catch (ex) {
           toast.error(ex?.response?.data?.message);
@@ -65,7 +83,7 @@ const useDashboard = () => {
     }
   };
 
-  return { onRegister, handleSubmit, register, errors, loading };
+  return { onRegister, handleSubmit, register, loading };
 };
 
 export default useDashboard;
