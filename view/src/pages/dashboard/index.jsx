@@ -3,8 +3,8 @@ import { store } from "context";
 import { Header } from "layout";
 import { useContext, useState } from "react";
 import { acronym } from "utils/acronym";
-
 import useDashboard from "./useDashboard";
+
 export const Dashboard = () => {
   const { onRegister, handleSubmit, register, loading } = useDashboard();
 
@@ -17,7 +17,7 @@ export const Dashboard = () => {
         ...imgfile,
         URL.createObjectURL(e.target.files[0]),
       ]);
-    }
+    };
   };
 
   return (
@@ -44,8 +44,7 @@ export const Dashboard = () => {
               e.target.reset();
             }}
             className="flex items-center gap-7"
-            title="Change your display name"
-          >
+            title="Change your display name">
             <div className="grow">
               <TextField
                 label="Enter a new name"
@@ -53,8 +52,7 @@ export const Dashboard = () => {
                 htmlFor="name"
                 id="name"
                 placeholder="Your name..."
-                validation={{ ...register("name") }}
-              />
+                validation={{ ...register("name") }}/>
             </div>
             <Button loading={loading}>Save</Button>
           </form>
@@ -66,8 +64,7 @@ export const Dashboard = () => {
               e.target.reset();
             }}
             className="flex items-center gap-7"
-            title="Change email"
-          >
+            title="Change email">
             <div className="grow">
               <TextField
                 label="Enter a new email"
@@ -75,15 +72,13 @@ export const Dashboard = () => {
                 htmlFor="email"
                 id="email"
                 placeholder="Your email..."
-                validation={{ ...register("email") }}
-              />
+                validation={{ ...register("email") }}/>
             </div>
             <Button loading={loading}>Save</Button>
           </form>
           <div
             title="Change your profile photo"
-            className="w-full flex flex-col items-center  pt-6"
-          >
+            className="w-full flex flex-col items-center  pt-6">
             <FileInput onChange={imgFilehandler} />
             {imgfile?.map((img) => {
               return (
@@ -93,12 +88,9 @@ export const Dashboard = () => {
                     <img
                       src={img}
                       className="max-w-md h-auto"
-                      alt="profile image"
-                    />
+                      alt="profile image"/>
                   </span>
-                  <Button loading={loading} classes="my-5 w-1/4 justify-center">
-                    Save
-                  </Button>
+                  <Button loading={loading} classes="my-5 w-1/4 justify-center">Save</Button>
                 </>
               );
             })}
@@ -110,35 +102,29 @@ export const Dashboard = () => {
               e.preventDefault();
               e.target.reset();
             }}
-            title="Change password"
-          >
+            title="Change password">
             <TextField
               label="Current password"
               type="password"
               htmlFor="currentPassword"
               id="currentPassword"
               placeholder="current password..."
-              validation={{ ...register("currentPassword") }}
-            />
+              validation={{ ...register("currentPassword") }}/>
             <TextField
               label="Enter a new password"
               type="password"
               htmlFor="newPassword"
               id="newPassword"
               placeholder="new password..."
-              validation={{ ...register("newPassword") }}
-            />
+              validation={{ ...register("newPassword") }}/>
             <TextField
               label="Repeat new password"
               type="password"
               htmlFor="repeatNewPassword"
               id="repeatNewPassword"
               placeholder="repeat password..."
-              validation={{ ...register("repeatNewPassword") }}
-            />
-            <Button loading={loading} classes="mx-auto w-1/4 justify-center">
-              Save
-            </Button>
+              validation={{ ...register("repeatNewPassword") }}/>
+            <Button loading={loading} classes="mx-auto w-1/4 justify-center">Save</Button>
           </form>
         </AccordionComponent>
       </div>

@@ -80,7 +80,7 @@ const useDashboard = () => {
           setLoading(false);
         }
         break;
-    }
+    };
   };
 
   return { onRegister, handleSubmit, register, loading };

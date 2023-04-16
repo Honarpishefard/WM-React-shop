@@ -14,7 +14,7 @@ const useAuth = () => {
       if (["/login", "/register"].includes(pathname)) navigate("/");
     } else {
       if (["/dashboard"].includes(pathname)) navigate("/");
-    }
+    };
   }, [loginToken]);
 };
 
