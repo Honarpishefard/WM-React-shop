@@ -3,11 +3,34 @@ import { store } from "context";
 import { Header } from "layout";
 import { useContext, useState } from "react";
 import { acronym } from "utils/acronym";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { changeUserInfoService } from "api";
+
+const dashboardSchema = yup
+  .object({
+    name: yup.string(),
+    email: yup.string(),
+    currentPassword: yup.string(),
+    newPassword: yup.string(),
+    repeatNewPassword: yup.string(),
+  })
+  .required();
 
 export const Dashboard = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(dashboardSchema) });
+
   const { user, setUser } = useContext(store);
 
   const [imgfile, uploadimg] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const imgFilehandler = (e) => {
     if (e.target.files.length !== 0) {
@@ -16,6 +39,45 @@ export const Dashboard = () => {
         URL.createObjectURL(e.target.files[0]),
       ]);
     }
+  };
+
+  const onRegister = (data, e) => {
+    switch (e.target.id) {
+      case "name":
+        if (!data.name) return toast.error("No new name entered !");
+        try {
+          setLoading(true);
+          changeUserInfoService({ id: user._id, name: data?.name });
+          toast.success(res?.data?.message);
+          setLoading(false);
+        } catch (ex) {
+          toast.error(ex?.response?.data?.message);
+          setLoading(false);
+        }
+        break;
+      case "email":
+        if (!data.email) return toast.error("No new email entered !");
+        try {
+          setLoading(true);
+          changeUserInfoService({ id: user._id, email: data?.email });
+          toast.success(res?.data?.message);
+          setLoading(false);
+        } catch (ex) {
+          toast.error(ex?.response?.data?.message);
+          setLoading(false);
+        }
+        break;
+    }
+
+    // try {
+    //   const res = await registerService(data);
+    //   toast.success(res?.data?.message);
+    //   setLoading(false);
+    //   navigate('/login');
+    // } catch (ex) {
+    //   toast.error(ex?.response?.data?.message);
+    //   setLoading(false);
+    // }
   };
 
   return (
@@ -34,7 +96,9 @@ export const Dashboard = () => {
           </div>
         </div>
         <AccordionComponent>
-          <div
+          <form
+            id="name"
+            onSubmit={handleSubmit(onRegister)}
             className="flex items-center gap-7"
             title="Change your display name"
           >
@@ -45,11 +109,17 @@ export const Dashboard = () => {
                 htmlFor="name"
                 id="name"
                 placeholder="Your name..."
+                validation={{ ...register("name") }}
               />
             </div>
-            <Button>Save</Button>
-          </div>
-          <div className="flex items-center gap-7" title="Change email">
+            <Button loading={loading}>Save</Button>
+          </form>
+          <form
+            id="email"
+            onSubmit={handleSubmit(onRegister)}
+            className="flex items-center gap-7"
+            title="Change email"
+          >
             <div className="grow">
               <TextField
                 label="Enter a new email"
@@ -57,10 +127,11 @@ export const Dashboard = () => {
                 htmlFor="email"
                 id="email"
                 placeholder="Your email..."
+                validation={{ ...register("email") }}
               />
             </div>
-            <Button>Save</Button>
-          </div>
+            <Button loading={loading}>Save</Button>
+          </form>
           <div
             title="Change your profile photo"
             className="w-full flex flex-col items-center  pt-6"
@@ -77,7 +148,9 @@ export const Dashboard = () => {
                       alt="profile image"
                     />
                   </span>
-                  <Button classes="my-5 w-1/4 justify-center">Save</Button>
+                  <Button loading={loading} classes="my-5 w-1/4 justify-center">
+                    Save
+                  </Button>
                 </>
               );
             })}
@@ -89,6 +162,7 @@ export const Dashboard = () => {
               htmlFor="currentPassword"
               id="currentPassword"
               placeholder="current password..."
+              validation={{ ...register("currentPassword") }}
             />
             <TextField
               label="Enter a new password"
@@ -96,6 +170,7 @@ export const Dashboard = () => {
               htmlFor="newPassword"
               id="newPassword"
               placeholder="new password..."
+              validation={{ ...register("newPassword") }}
             />
             <TextField
               label="Repeat new password"
@@ -103,8 +178,11 @@ export const Dashboard = () => {
               htmlFor="repeatNewPassword"
               id="repeatNewPassword"
               placeholder="repeat password..."
+              validation={{ ...register("repeatNewPassword") }}
             />
-            <Button classes='mx-auto w-1/4 justify-center'>Save</Button>
+            <Button loading={loading} classes="mx-auto w-1/4 justify-center">
+              Save
+            </Button>
           </div>
         </AccordionComponent>
       </div>

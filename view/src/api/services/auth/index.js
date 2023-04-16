@@ -12,3 +12,8 @@ export const fetchUserService = async (data) => {
   const res = await mainInstance.post("/users", data);
   return res.data;
 };
+
+export const changeUserInfoService = async (data) => {
+  const res = await mainInstance.post("/users/dashboard", data);
+  return res.data;
+};
