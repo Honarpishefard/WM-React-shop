@@ -41,14 +41,18 @@ export const Dashboard = () => {
     }
   };
 
-  const onRegister = (data, e) => {
+  const onRegister = async (data, e) => {
+    setLoading(true);
     switch (e.target.id) {
       case "name":
         if (!data.name) return toast.error("No new name entered !");
         try {
-          setLoading(true);
-          changeUserInfoService({ id: user._id, name: data?.name });
-          toast.success(res?.data?.message);
+          const res = await changeUserInfoService({
+            id: user._id,
+            name: data?.name,
+          });
+          toast.success(res?.message);
+          setUser(res?.user);
           setLoading(false);
         } catch (ex) {
           toast.error(ex?.response?.data?.message);
@@ -58,9 +62,12 @@ export const Dashboard = () => {
       case "email":
         if (!data.email) return toast.error("No new email entered !");
         try {
-          setLoading(true);
-          changeUserInfoService({ id: user._id, email: data?.email });
-          toast.success(res?.data?.message);
+          const ress = await changeUserInfoService({
+            id: user._id,
+            email: data?.email,
+          });
+          toast.success(ress?.message);
+          setUser(ress?.user);
           setLoading(false);
         } catch (ex) {
           toast.error(ex?.response?.data?.message);
@@ -68,16 +75,6 @@ export const Dashboard = () => {
         }
         break;
     }
-
-    // try {
-    //   const res = await registerService(data);
-    //   toast.success(res?.data?.message);
-    //   setLoading(false);
-    //   navigate('/login');
-    // } catch (ex) {
-    //   toast.error(ex?.response?.data?.message);
-    //   setLoading(false);
-    // }
   };
 
   return (
