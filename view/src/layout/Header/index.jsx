@@ -59,7 +59,7 @@ export const Header = () => {
             <Dropdown
               arrowIcon={false}
               inline={true}
-              label={ user.profilePicture ? <img className="w-10 rounded-md" src={uploadsURL + user?.profilePicture} alt="" /> : <Avatar className="px-2"
+              label={ user?.profilePicture ? <img className="w-10 rounded-md" src={uploadsURL + user?.profilePicture} alt="" /> : <Avatar className="px-2"
                 placeholderInitials={acronym(user?.name)}/> }>
               <Dropdown.Header>
                 <span className="block text-sm">{user.name}</span>

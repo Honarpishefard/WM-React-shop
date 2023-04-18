@@ -90,13 +90,13 @@ const useDashboard = () => {
     formData.append("picture", file);
     try {
       const res = await formDataService(formData);
+      setUser(res?.user);
       toast.success(res?.data?.message);
-      console.log(res.data.message);
       setLoading(false);
     } catch (ex) {
       toast.error(ex?.response?.data?.message);
       setLoading(false);
-    }
+    };
   };
 
   return { onRegister, handleSubmit, register, onFormDataSumbit, loading };

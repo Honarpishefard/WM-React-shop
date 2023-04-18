@@ -19,7 +19,7 @@ const fetchUser = async (req, res) => {
 const changeUserInfo = async (req, res) => {
   const { id, name, email, currentPassword, newPassword } = req.body;
   const compareUser = await User.find({ _id: id });
-  const picture = req.files.picture;
+  const picture = req?.files?.picture;
 
   if (name) {
     if (name == compareUser[0].name) return res.status(400).json({message: "This name is already chosen"});

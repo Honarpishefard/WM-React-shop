@@ -15,6 +15,8 @@ export const Dashboard = () => {
 
   const imgFilehandler = (e) => {
     if (e.target.files.length !== 0) {
+      uploadimg([]);
+      setFile();
       uploadimg((imgfile) => [
         ...imgfile,
         URL.createObjectURL(e.target.files[0]),
@@ -27,11 +29,22 @@ export const Dashboard = () => {
     <>
       <Header />
       <div className="flex flex-col items-center py-12 px-8">
-        <div className="flex flex-col items-center">
-          {user.profilePicture ? <img className="w-full rounded-full" src={uploadsURL + user?.profilePicture} alt="" /> : 
-              <div className="bg-gradient-to-br from-green-300 to-blue-400 hover:bg-gradient-to-bl rounded-full w-40 h-40 flex justify-center items-center">
-                <p className="text-gray-800 font-light text-6xl">{acronym(user?.name)}</p>
-              </div>}
+        <div className="flex flex-col items-center relative">
+          {user?.profilePicture ? <img className="w-full rounded-full" src={uploadsURL + user?.profilePicture} alt="profile picture" /> : 
+            <div className="bg-gradient-to-br from-green-300 to-blue-400 hover:bg-gradient-to-bl rounded-full w-40 h-40 flex justify-center items-center">
+              <p className="text-gray-800 font-light text-6xl">{acronym(user?.name)}</p>
+            </div>}
+          <div onClick={() => console.log('delete profile picture')} className="bg-black bg-opacity-50 text-white p-3 rounded-full absolute top-2 right-0">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-trash3-fill"
+              viewBox="0 0 16 16">
+              <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+            </svg>
+          </div>
           <div className="flex flex-col items-center pt-3 pb-8">
             <p className="font-normal text-xl">{user?.name}</p>
             <p className="font-normal text-xl">{user?.email}</p>
