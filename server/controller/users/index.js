@@ -1,5 +1,8 @@
-const { User } = require("../../model/User");
 const bcrypt = require("bcrypt");
+const sharp = require("sharp");
+const { User } = require("../../model/User");
+const { checkImageFormat } = require("../../utils/checkImageFormat");
+const { getPath } = require("../../utils/getPath");
 
 const fetchUser = async (req, res) => {
   const { email, id } = req.body;
@@ -40,8 +43,17 @@ const changeUserInfo = async (req, res) => {
     });
   };
   if (picture) {
-    
-  }
+    if (checkImageFormat(picture)) {
+      await sharp(picture.data)
+        .jpeg({ quality: 60 })
+        .toFile(getPath(`public/uploads/${picture.md5 + picture.name}.jpg`))
+        .catch((err) => console.log(err));
+    } else {
+      return res.status(400).json({ message: "file format not supported" });
+    };
+    await User.findOneAndUpdate(id, {profilePicture: picture ? picture.md5 + picture.name + ".jpg" : ""},  { new: true });
+    return res.status(200).json({ message: "Your profile picture was updated successfully" });
+  };
 };
 
 module.exports = { fetchUser, changeUserInfo };
