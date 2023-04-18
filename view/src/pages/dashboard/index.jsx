@@ -34,7 +34,7 @@ export const Dashboard = () => {
             <div className="bg-gradient-to-br from-green-300 to-blue-400 hover:bg-gradient-to-bl rounded-full w-40 h-40 flex justify-center items-center">
               <p className="text-gray-800 font-light text-6xl">{acronym(user?.name)}</p>
             </div>}
-          <div onClick={() => console.log('delete profile picture')} className="bg-black bg-opacity-50 text-white p-3 rounded-full absolute top-2 right-0">
+          <div onClick={() => console.log('delete profile picture')} className="bg-black bg-opacity-50 text-white cursor-pointer p-3 rounded-full absolute top-2 right-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
