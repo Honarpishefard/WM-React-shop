@@ -4,6 +4,7 @@ import { Header } from "layout";
 import { useContext, useState } from "react";
 import { acronym } from "utils/acronym";
 import useDashboard from "./useDashboard";
+import { uploadsURL } from "api";
 
 export const Dashboard = () => {
   const { onRegister, handleSubmit, register, onFormDataSumbit, loading } = useDashboard();
@@ -27,11 +28,10 @@ export const Dashboard = () => {
       <Header />
       <div className="flex flex-col items-center py-12 px-8">
         <div className="flex flex-col items-center">
-          <div className="bg-gradient-to-br from-green-300 to-blue-400 hover:bg-gradient-to-bl rounded-full w-40 h-40 flex justify-center items-center">
-            <p className="text-gray-800 font-light text-6xl">
-              {acronym(user?.name)}
-            </p>
-          </div>
+          {user.profilePicture ? <img className="w-full rounded-full" src={uploadsURL + user?.profilePicture} alt="" /> : 
+              <div className="bg-gradient-to-br from-green-300 to-blue-400 hover:bg-gradient-to-bl rounded-full w-40 h-40 flex justify-center items-center">
+                <p className="text-gray-800 font-light text-6xl">{acronym(user?.name)}</p>
+              </div>}
           <div className="flex flex-col items-center pt-3 pb-8">
             <p className="font-normal text-xl">{user?.name}</p>
             <p className="font-normal text-xl">{user?.email}</p>

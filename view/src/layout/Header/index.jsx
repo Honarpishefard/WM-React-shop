@@ -8,6 +8,7 @@ import { useContext, useState } from "react";
 import { store } from "context";
 import "assets/style/index.css";
 import { acronym } from "utils/acronym";
+import { uploadsURL } from "api";
 
 export const Header = () => {
   const [token, setToken] = useState(Cookies.get("loginToken"));
@@ -58,11 +59,8 @@ export const Header = () => {
             <Dropdown
               arrowIcon={false}
               inline={true}
-              label={
-                <Avatar
-                  className="px-2"
-                  placeholderInitials={acronym(user?.name)}/>
-                }>
+              label={ user.profilePicture ? <img className="w-10 rounded-md" src={uploadsURL + user?.profilePicture} alt="" /> : <Avatar className="px-2"
+                placeholderInitials={acronym(user?.name)}/> }>
               <Dropdown.Header>
                 <span className="block text-sm">{user.name}</span>
                 <span className="block truncate text-sm font-medium">

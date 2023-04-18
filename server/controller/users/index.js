@@ -45,14 +45,18 @@ const changeUserInfo = async (req, res) => {
   if (picture) {
     if (checkImageFormat(picture)) {
       await sharp(picture.data)
-        .jpeg({ quality: 60 })
+        .jpeg({ quality: 80 })
+        .resize({
+          width: 160,
+          height: 160
+        })
         .toFile(getPath(`public/uploads/${picture.md5 + picture.name}.jpg`))
         .catch((err) => console.log(err));
     } else {
       return res.status(400).json({ message: "file format not supported" });
     };
-    await User.findOneAndUpdate(id, {profilePicture: picture ? picture.md5 + picture.name + ".jpg" : ""},  { new: true });
-    return res.status(200).json({ message: "Your profile picture was updated successfully" });
+    const user = await User.findOneAndUpdate(id, {profilePicture: picture ? picture.md5 + picture.name + ".jpg" : ""},  { new: true });
+    return res.status(200).json({ message: "Your profile picture was updated successfully", user });
   };
 };
 
