@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useContext, useState } from "react";
-import { changeUserInfoService } from "api";
+import { changeUserInfoService, formDataService, mainInstance } from "api";
 import { store } from "context";
 
 const dashboardSchema = yup
@@ -27,8 +27,7 @@ const useDashboard = () => {
   const [loading, setLoading] = useState(false);
   const { user, setUser } = useContext(store);
 
-  const onRegister = async (data, e) => {
-    console.log(data);
+  const onRegister = async (data, e, file) => {
     switch (e.target.id) {
       case "name":
         if (!data.name) return toast.error("No new name entered");
@@ -83,7 +82,21 @@ const useDashboard = () => {
     };
   };
 
-  return { onRegister, handleSubmit, register, loading };
+  const onFormDataSumbit = async (file) => {
+    if (!file) return toast.error("Select a file before submitting");
+    const formData = new FormData();
+    formData.append("picture", file);
+    try {
+      const res = await formDataService(formData);
+      toast.success(res?.data?.message);
+      console.log(res.data.message);
+      setLoading(false);
+    } catch (ex) {
+      toast.error(ex?.response?.data?.message);
+    }
+  };
+
+  return { onRegister, handleSubmit, register, onFormDataSumbit, loading };
 };
 
 export default useDashboard;

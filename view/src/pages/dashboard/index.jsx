@@ -6,10 +6,11 @@ import { acronym } from "utils/acronym";
 import useDashboard from "./useDashboard";
 
 export const Dashboard = () => {
-  const { onRegister, handleSubmit, register, loading } = useDashboard();
+  const { onRegister, handleSubmit, register, onFormDataSumbit, loading } = useDashboard();
 
   const { user, setUser } = useContext(store);
   const [imgfile, uploadimg] = useState([]);
+  const [file, setFile] = useState();
 
   const imgFilehandler = (e) => {
     if (e.target.files.length !== 0) {
@@ -17,6 +18,7 @@ export const Dashboard = () => {
         ...imgfile,
         URL.createObjectURL(e.target.files[0]),
       ]);
+      setFile(e.target.files[0])
     };
   };
 
@@ -76,7 +78,11 @@ export const Dashboard = () => {
             </div>
             <Button loading={loading}>Save</Button>
           </form>
-          <div
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            onFormDataSumbit(file)
+            }}
+            id="profileImageUpload"
             title="Change your profile photo"
             className="w-full flex flex-col items-center  pt-6">
             <FileInput onChange={imgFilehandler} />
@@ -84,7 +90,7 @@ export const Dashboard = () => {
               return (
                 <>
                   <p className="font-normal text-lg">Preview:</p>
-                  <span className="py-4" key={img}>
+                  <span className="p-4" key={img}>
                     <img
                       src={img}
                       className="max-w-md h-auto"
@@ -94,7 +100,7 @@ export const Dashboard = () => {
                 </>
               );
             })}
-          </div>
+          </form>
           <form
             id="password"
             onSubmit={handleSubmit(onRegister)}
