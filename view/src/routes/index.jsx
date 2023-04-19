@@ -1,12 +1,4 @@
-import {
-  Home,
-  Signup,
-  Login,
-  Products,
-  ProductDetails,
-  CardScreen,
-  Dashboard,
-} from "pages";
+import { Home, Signup, Login, Products, ProductDetails, CardScreen, Dashboard } from "pages";
 
 export const routes = [
   {

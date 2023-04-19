@@ -32,21 +32,21 @@ export const SideBar = ({ totalPrice }) => {
         <p className="text-xl font-bold pb-6 w-fit">Receipt</p>
         <div className="w-full flex flex-col gap-2">
           <p className="flex w-full justify-between text-gray-500 font-normal">
-            Total:{" "}
+            Total:
             <span className="text-black font-semibold">$ {totalPrice}</span>
           </p>
           <p className="flex w-full justify-between text-gray-500 font-normal">
-            Shipping cost:{" "}
+            Shipping cost:
             <span className="text-black font-semibold">Free!</span>
           </p>
           <p className="flex w-full justify-between text-gray-500 font-normal">
-            Discount:{" "}
+            Discount:
             <span className="text-black font-semibold">
               {discount ? `${discountPercent}%` : "-"}
             </span>
           </p>
           <p className="flex w-full justify-between text-gray-500 font-normal">
-            Total cost:{" "}
+            Total cost:
             <span className="text-black font-semibold flex flex-col items-center">
               {discount ? (
                 <div className="flex  flex-col items-end">
@@ -68,14 +68,8 @@ export const SideBar = ({ totalPrice }) => {
           onSubmit={(e) => {
             e.preventDefault();
             checkDiscountCode();
-          }}
-        >
-          <TextField
-            onChange={(event) => setCode(event.target.value)}
-            label="Enter it here:"
-            htmlFor="discountCode"
-            id="discountCode"
-          />
+          }}>
+          <TextField onChange={(event) => setCode(event.target.value)} label="Enter it here:" htmlFor="discountCode" id="discountCode"/>
           <p className="text-gray-400 font-light text-sm mb-6">Try "BLACKFRIDAY" or "HAPPYNEWYEAR"</p>
           <Button classes="justify-center w-full">Submit code</Button>
         </form>

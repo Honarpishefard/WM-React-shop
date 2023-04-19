@@ -28,9 +28,8 @@ export default function ContextProvider({ children }) {
         setProducts,
         user,
         setUser,
-      }}
-    >
+      }}>
       {children}
     </store.Provider>
   );
-}
+};
