@@ -62,25 +62,26 @@ const useDashboard = () => {
         }
         break;
       case "password":
-        if (!data.currentPassword) return toast.error("Enter your current password");
+        if (!data.currentPassword)
+          return toast.error("Enter your current password");
         if (!data.newPassword) return toast.error("Enter a new password");
-        if (data?.newPassword !== data?.repeatNewPassword) return toast.error("The passwords don't match");
+        if (data?.newPassword !== data?.repeatNewPassword)
+          return toast.error("The passwords don't match");
         setLoading(true);
         try {
-          const res = await changeUserInfoService({
+          await changeUserInfoService({
             id: user._id,
             currentPassword: data?.currentPassword,
             newPassword: data?.newPassword,
           });
           toast.success(res?.message);
-          setUser(res?.user);
           setLoading(false);
         } catch (ex) {
           toast.error(ex?.response?.data?.message);
           setLoading(false);
         }
         break;
-    };
+    }
   };
 
   const onFormDataSumbit = async (file) => {
@@ -89,14 +90,15 @@ const useDashboard = () => {
     const formData = new FormData();
     formData.append("picture", file);
     try {
-      const res = await formDataService(formData);
-      setUser(res?.user);
-      toast.success(res?.data?.message);
-      setLoading(false);
+      formDataService(formData).then((res) => {
+        setUser(res.data.user);
+        toast.success(res?.data?.message);
+        setLoading(false);
+      });
     } catch (ex) {
       toast.error(ex?.response?.data?.message);
       setLoading(false);
-    };
+    }
   };
 
   return { onRegister, handleSubmit, register, onFormDataSumbit, loading };

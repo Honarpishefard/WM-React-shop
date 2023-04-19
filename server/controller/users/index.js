@@ -17,7 +17,7 @@ const fetchUser = async (req, res) => {
 };
 
 const changeUserInfo = async (req, res) => {
-  const { id, name, email, currentPassword, newPassword } = req.body;
+  const { id, name, email, currentPassword, newPassword, action } = req.body;
   const compareUser = await User.find({ _id: id });
   const picture = req?.files?.picture;
 
@@ -58,6 +58,10 @@ const changeUserInfo = async (req, res) => {
     const user = await User.findOneAndUpdate(id, {profilePicture: picture ? picture.md5 + picture.name + ".jpg" : ""},  { new: true });
     return res.status(200).json({ message: "Your profile picture was updated successfully", user });
   };
+  if (action == "deletePic") {
+    const user = await User.findOneAndUpdate(id, {profilePicture: ""},  { new: true });
+    return res.status(200).json({ message: "Your profile picture was removed successfully", user });
+  }
 };
 
 module.exports = { fetchUser, changeUserInfo };

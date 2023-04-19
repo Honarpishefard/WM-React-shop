@@ -4,7 +4,7 @@ import { Header } from "layout";
 import { useContext, useState } from "react";
 import { acronym } from "utils/acronym";
 import useDashboard from "./useDashboard";
-import { uploadsURL } from "api";
+import { uploadsURL, changeUserInfoService } from "api";
 
 export const Dashboard = () => {
   const { onRegister, handleSubmit, register, onFormDataSumbit, loading } = useDashboard();
@@ -21,7 +21,7 @@ export const Dashboard = () => {
         ...imgfile,
         URL.createObjectURL(e.target.files[0]),
       ]);
-      setFile(e.target.files[0])
+      setFile(e.target.files[0]);
     };
   };
 
@@ -30,11 +30,11 @@ export const Dashboard = () => {
       <Header />
       <div className="flex flex-col items-center py-12 px-8">
         <div className="flex flex-col items-center relative">
-          {user?.profilePicture ? <img className="w-full rounded-full" src={uploadsURL + user?.profilePicture} alt="profile picture" /> : 
+          { user?.profilePicture ? <img className="w-40 rounded-full" src={uploadsURL + user?.profilePicture} alt="profile picture" /> : 
             <div className="bg-gradient-to-br from-green-300 to-blue-400 hover:bg-gradient-to-bl rounded-full w-40 h-40 flex justify-center items-center">
               <p className="text-gray-800 font-light text-6xl">{acronym(user?.name)}</p>
-            </div>}
-          <div onClick={() => console.log('delete profile picture')} className="bg-black bg-opacity-50 text-white cursor-pointer p-3 rounded-full absolute top-2 right-0">
+            </div> }
+          { user?.profilePicture ? <div onClick={() => changeUserInfoService({ id: user?._id, action:"deletePic" }).then((res) => setUser(res.user))} className="bg-black bg-opacity-50 text-white cursor-pointer p-3 rounded-full absolute top-2 right-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -44,7 +44,7 @@ export const Dashboard = () => {
               viewBox="0 0 16 16">
               <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
             </svg>
-          </div>
+          </div> : null }
           <div className="flex flex-col items-center pt-3 pb-8">
             <p className="font-normal text-xl">{user?.name}</p>
             <p className="font-normal text-xl">{user?.email}</p>
@@ -93,7 +93,7 @@ export const Dashboard = () => {
           </form>
           <form onSubmit={(e) => {
             e.preventDefault();
-            onFormDataSumbit(file)
+            onFormDataSumbit(file).then(() => uploadimg([]));
             }}
             id="profileImageUpload"
             title="Change your profile photo"
