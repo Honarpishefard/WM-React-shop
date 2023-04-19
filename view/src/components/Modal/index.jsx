@@ -2,20 +2,19 @@ import { Button } from "components";
 import { Modal } from "flowbite-react";
 import React, { useState } from "react";
 
-export const ModalComponent = ({ cancel, submit, onClick, svg, classes, children }) => {
+export const ModalComponent = ({ cancel, submit, onClick, svg, classes, buttonClasses, children }) => {
   const [visible, setVisible] = useState(false);
 
   return (
     <React.Fragment>
-      <Button classes="mx-6 mb-6 self-end" onClick={() => setVisible(true)}>
+      <Button classes={`mx-6 mb-6 self-end ${buttonClasses}`} onClick={() => setVisible(true)}>
         {svg}
       </Button>
       <Modal
         show={visible}
         size="md"
         popup={true}
-        onClose={() => setVisible(false)}
-      >
+        onClose={() => setVisible(false)}>
         <Modal.Header />
         <Modal.Body>
           <div className="text-center flex flex-col items-center">
@@ -24,14 +23,12 @@ export const ModalComponent = ({ cancel, submit, onClick, svg, classes, children
               <button
                 onClick={onClick}
                 onClickCapture={() => setVisible(false)}
-                className={`text-white px-3 py-1 rounded-md ${classes}`}
-              >
+                className={`text-white px-3 py-1 rounded-md ${classes}`}>
                 {submit}
               </button>
               <button
                 className="text-gray-500 px-5 py-1 border rounded-md"
-                onClick={() => setVisible(false)}
-              >
+                onClick={() => setVisible(false)}>
                 {cancel}
               </button>
             </div>
