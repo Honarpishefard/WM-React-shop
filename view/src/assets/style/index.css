@@ -28,6 +28,7 @@ div[data-testid="flowbite-tooltip-target"] {
 
 div[data-testid="flowbite-tooltip-target"] > button {
     width: 100%;
+    justify-content: center;
 }
 
 div[data-testid="flowbite-tooltip"] > div > ul > div[data-testid="flowbite-tooltip-target"]{
