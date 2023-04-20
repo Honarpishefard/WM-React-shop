@@ -38,11 +38,6 @@ export const SideBar = ({ sections }) => {
             <Dropdown.Item>Descending</Dropdown.Item>
           </Dropdown>
         </Dropdown>
-        <div className="flex flex-col">
-          <p className="order-last">1</p>
-          <p>2</p>
-          <p>3</p>
-        </div>
       </div>
       <SideBarMenu>
         <div className="flex flex-col gap-4 border-b pb-4">
