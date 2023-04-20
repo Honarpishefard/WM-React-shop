@@ -7,7 +7,7 @@ export const ModalComponent = ({ cancel, submit, onClick, svg, classes, buttonCl
 
   return (
     <React.Fragment>
-      <Button classes={`mx-6 mb-6 self-end ${buttonClasses}`} onClick={() => setVisible(true)}>{svg}</Button>
+      <Button classes={`mr-6 mb-6 md:mr-3 md:mb-3 self-end ${buttonClasses}`} onClick={() => setVisible(true)}>{svg}</Button>
       <Modal show={visible} size="md" popup={true} onClose={() => setVisible(false)}>
         <Modal.Header />
         <Modal.Body>
@@ -17,9 +17,7 @@ export const ModalComponent = ({ cancel, submit, onClick, svg, classes, buttonCl
               <button onClick={onClick} onClickCapture={() => setVisible(false)} className={`text-white px-3 py-1 rounded-md ${classes}`}>
                 {submit}
               </button>
-              <button className="text-gray-500 px-5 py-1 border rounded-md" onClick={() => setVisible(false)}>
-                {cancel}
-              </button>
+              <button className="text-gray-500 px-5 py-1 border rounded-md" onClick={() => setVisible(false)}>{cancel}</button>
             </div>
           </div>
         </Modal.Body>

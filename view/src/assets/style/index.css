@@ -1,13 +1,15 @@
-.navbar>ul {
-    align-items: center;
+@media only screen and (min-width: 768px){
+    .navbar>ul {
+        align-items: center;
+    }
 }
 
 .max-h-40rem {
     max-height: 40rem;
 }
 
-.min-w-25 {
-    min-width: 25%;
+.min-w-20 {
+    min-width: 20%;
 }
 
 .tabs-group>div {
@@ -20,6 +22,10 @@
 
 .h-50vh {
     height: 50vh;
+}
+
+.mr-0-force{
+    margin-right: 0 !important;
 }
 
 div[data-testid="flowbite-tooltip-target"] {

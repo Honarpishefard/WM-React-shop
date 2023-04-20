@@ -28,41 +28,29 @@ export const SideBar = ({ totalPrice }) => {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex flex-col items-cente py-10 px-12 bg-white border border-gray-200 rounded-3xl overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="flex flex-col items-cente py-6 px-8 bg-white border border-gray-200 rounded-3xl overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700">
         <p className="text-xl font-bold pb-6 w-fit">Receipt</p>
         <div className="w-full flex flex-col gap-2">
-          <p className="flex w-full justify-between text-gray-500 font-normal">
-            Total:
-            <span className="text-black font-semibold">$ {totalPrice}</span>
+          <p className="flex w-full justify-between text-gray-500 font-normal">Total:<span className="text-black font-semibold">$ {totalPrice}</span>
           </p>
-          <p className="flex w-full justify-between text-gray-500 font-normal">
-            Shipping cost:
-            <span className="text-black font-semibold">Free!</span>
+          <p className="flex w-full justify-between text-gray-500 font-normal">Shipping cost:<span className="text-black font-semibold">Free!</span>
           </p>
-          <p className="flex w-full justify-between text-gray-500 font-normal">
-            Discount:
-            <span className="text-black font-semibold">
-              {discount ? `${discountPercent}%` : "-"}
-            </span>
+          <p className="flex w-full justify-between text-gray-500 font-normal">Discount:
+            <span className="text-black font-semibold">{discount ? `${discountPercent}%` : "-"}</span>
           </p>
-          <p className="flex w-full justify-between text-gray-500 font-normal">
-            Total cost:
+          <p className="flex w-full justify-between text-gray-500 font-normal">Total cost:
             <span className="text-black font-semibold flex flex-col items-center">
               {discount ? (
                 <div className="flex  flex-col items-end">
                   <p className="text-gray-500 font-normal line-through">{`$ ${totalPrice}`}</p>
-                  <p>{`$ ${
-                    totalPrice - (totalPrice * discountPercent) / 100
-                  }`}</p>
+                  <p>{`$ ${totalPrice - (totalPrice * discountPercent) / 100 }`}</p>
                 </div>
-              ) : (
-                <p className="">{`$ ${totalPrice}`}</p>
-              )}
+              ) : ( <p className="">{`$ ${totalPrice}`}</p> )}
             </span>
           </p>
         </div>
       </div>
-      <div className="flex flex-col items-cente py-10 px-12 bg-white border border-gray-200 rounded-3xl overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="flex flex-col items-cente py-6 px-8 bg-white border border-gray-200 rounded-3xl overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700">
         <p className="text-xl font-bold pb-6 w-fit">Have a discount code?</p>
         <form
           onSubmit={(e) => {

@@ -25,6 +25,7 @@ export const SideBar = ({ sections }) => {
     <div>
       <div className="px-10 py-9 mb-10 hidden flex-col gap-5 border-r md:flex">
         <div className="flex flex-col gap-4 border-b pb-4">
+          <p className="block truncate text-lg font-medium">Select a category :</p>
           {sections.map((i) => (
             <div className="bg-gray-100 rounded-lg text-black font-medium py-2 px-12" onClick={() => handleFilter(i)} key={i}>{capitalizeFirstLetter(i)}</div>
           ))}
@@ -41,6 +42,7 @@ export const SideBar = ({ sections }) => {
       </div>
       <SideBarMenu>
         <div className="flex flex-col gap-4 border-b pb-4">
+          <p className="block truncate text-lg font-medium">Select a category :</p>
           {sections.map((i) => (
             <div className="bg-gray-100 rounded-lg text-black font-medium py-2 px-12 flex justify-center" onClick={() => handleFilter(i)} key={i}>{capitalizeFirstLetter(i)}</div>
           ))}
