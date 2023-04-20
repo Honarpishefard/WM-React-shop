@@ -6,7 +6,7 @@
     max-height: 40rem;
 }
 
-.min-w-25{
+.min-w-25 {
     min-width: 25%;
 }
 
@@ -20,4 +20,16 @@
 
 .h-50vh {
     height: 50vh;
+}
+
+div[data-testid="flowbite-tooltip-target"] {
+    width: 100%;
+}
+
+div[data-testid="flowbite-tooltip-target"] > button {
+    width: 100%;
+}
+
+div[data-testid="flowbite-tooltip"] > div > ul > div[data-testid="flowbite-tooltip-target"]{
+    padding: .5rem 1rem;
 }

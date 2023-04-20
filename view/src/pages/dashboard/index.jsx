@@ -43,10 +43,7 @@ export const Dashboard = () => {
           { user?.profilePicture ? <div className="opacity-60">
             <ModalComponent classes="bg-red-700 mx-0" buttonClasses="rounded-full absolute top-2 right-0 mx-0 mb-0 px-3 py-3 from-black to-black"
               onClick={() =>
-                changeUserInfoService({
-                  id: user?._id,
-                  action: "deletePic",
-                }).then((res) => {
+                changeUserInfoService({ id: user?._id, action: "deletePic" }).then((res) => {
                   setUser(res?.user);
                   toast.success(res?.message)
                 })}
@@ -72,9 +69,7 @@ export const Dashboard = () => {
                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                   <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
                 </svg>
-                <h3 className="mb-8 text-lg font-normal text-gray-700 dark:text-gray-400">
-                  Are you sure you want to delete your profile picture?
-                </h3>
+                <h3 className="mb-8 text-lg font-normal text-gray-700 dark:text-gray-400">Are you sure you want to delete your profile picture?</h3>
               </div>
             </ModalComponent>
           </div> : null }
@@ -83,7 +78,7 @@ export const Dashboard = () => {
             <p className="font-normal text-xl">{user?.email}</p>
           </div>
         </div>
-        <AccordionComponent>
+        <AccordionComponent classes="w-3/4">
           <form id="name" onSubmit={handleSubmit(onRegister)} className="flex items-center gap-7" title="Change your display name"
             onSubmitCapture={(e) => {
               e.preventDefault();
