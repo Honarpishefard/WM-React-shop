@@ -98,7 +98,7 @@ export const Dashboard = () => {
                 <>
                   <p className="font-normal text-lg">Preview:</p>
                   <span className="p-4" key={img}>
-                    <img src={img} className="max-w-md h-auto" alt="profile image"/>
+                    <img src={img} className="md:max-w-md max-w-full h-auto" alt="profile image"/>
                   </span>
                   <Button loading={loading} classes="my-5 w-1/4 justify-center">Save</Button>
                 </>

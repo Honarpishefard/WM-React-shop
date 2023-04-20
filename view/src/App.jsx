@@ -7,9 +7,8 @@ import useAuth from "hooks/useAuth";
 import Cookies from "js-cookie";
 
 function App() {
-  const loginToken = Cookies.get("loginToken");
-
   useAuth();
+  const loginToken = Cookies.get("loginToken");
   const generateRoutes = useCallback(() => {
     return routes.map((route) => <Route key={route.path} {...route} />);
   }, [routes, loginToken]);

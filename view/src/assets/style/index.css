@@ -28,13 +28,13 @@
     margin-right: 0 !important;
 }
 
-div[data-testid="flowbite-tooltip-target"] {
-    width: 100%;
+div[data-testid="flowbite-tooltip-target"]>button {
+    justify-content: center;
 }
 
-div[data-testid="flowbite-tooltip-target"]>button {
-    width: 100%;
-    justify-content: center;
+div[data-testid="flowbite-tooltip-target"]>button>span {
+    padding: .5rem 2.8rem;
+    margin: 0 auto;
 }
 
 div[data-testid="flowbite-tooltip"]>div>ul>div[data-testid="flowbite-tooltip-target"] {

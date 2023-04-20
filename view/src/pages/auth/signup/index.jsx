@@ -38,7 +38,7 @@ export function Signup() {
               <Button classes="w-full justify-center" loading={loading}>Create Account</Button>
             </form>
             <p className="text-sm font-light text-gray-500 dark:text-gray-400"> Already have an account?
-              <Link to="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Log in here</Link>
+              <Link to="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500"> Login here</Link>
             </p>
           </div>
         </div>
