@@ -11,6 +11,10 @@
     min-width: 20%;
 }
 
+.min-w-70 {
+    min-width: 70%;
+}
+
 .tabs-group>div {
     width: 100%;
 }

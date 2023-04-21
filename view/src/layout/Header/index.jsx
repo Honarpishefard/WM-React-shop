@@ -26,7 +26,7 @@ export const Header = () => {
             <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">W&M</span>
           </Link>
           <Navbar.Collapse className="navbar mx-auto">
-            <div className="flex flex-col items-start gap-2 md:flex-row md:items-center md:gap-4">
+            <div className="flex flex-col items-start gap-2 md:flex-row md:items-center md:gap-6">
               <Link to="/products/men" active={true} className="text-base text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
                 Man’s</Link>
               <Link className="text-base text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
@@ -50,8 +50,14 @@ export const Header = () => {
             </div>
             <SearchInput classes="md:hidden flex w-full"/>
             { searchInputVisibility ? 
-              <div className="search-form hidden md:flex pt-4 fix top-full left-0 justify-center bg-black bg-opacity-50 h-screen w-screen">
-                <SearchInput classes="hidden md:flex absolute w-1/2"/>
+              <div className="search-form hidden md:flex pt-6 fixed top-16 left-0 justify-center bg-black bg-opacity-50 h-screen w-screen">
+                <button onClick={() => setSearchInputVisibility(false)} type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                  <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"></path>
+                  </svg>
+                  <span className="sr-only">Close menu</span>
+               </button>
+                <SearchInput classes="hidden md:flex absolute min-w-70 max-w-xl px-5"/>
               </div> : null}
           </Navbar.Collapse>
         </div>
