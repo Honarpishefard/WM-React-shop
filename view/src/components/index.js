@@ -6,3 +6,4 @@ export * from "./BasketProducts";
 export * from "./Modal";
 export * from "./Accordion";
 export * from "./FileInput";
+export * from "./SearchInput";

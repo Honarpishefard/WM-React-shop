@@ -1,7 +1,6 @@
-@media only screen and (min-width: 768px){
-    .navbar>ul {
-        align-items: center;
-    }
+.navbar>ul {
+    flex-direction: column;
+    /* position: relative; */
 }
 
 .max-h-40rem {
@@ -24,7 +23,7 @@
     height: 50vh;
 }
 
-.mr-0-force{
+.mr-0-force {
     margin-right: 0 !important;
 }
 
@@ -34,9 +33,12 @@ div[data-testid="flowbite-tooltip-target"]>button {
 
 div[data-testid="flowbite-tooltip-target"]>button>span {
     padding: .5rem 2.8rem;
-    margin: 0 auto;
 }
 
 div[data-testid="flowbite-tooltip"]>div>ul>div[data-testid="flowbite-tooltip-target"] {
     padding: .5rem 1rem;
+}
+
+.search-form{
+    margin: 0 !important;
 }
