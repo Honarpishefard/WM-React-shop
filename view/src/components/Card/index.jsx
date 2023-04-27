@@ -1,6 +1,7 @@
-export const Card = ({ title, newPrice, oldPrice, image, onClick, children }) => {
+export const Card = ({ title, newPrice, oldPrice, image, onClick, classes, children }) => {
   return (
-    <div className="w-full h-full mx-auto justify-between items-end flex flex-col max-w-sm bg-white border border-gray-200 rounded-3xl shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className={`w-full h-full mx-auto justify-between items-end flex flex-col max-w-sm 
+      bg-white border border-gray-200 rounded-3xl shadow dark:bg-gray-800 dark:border-gray-700 ${classes}`}>
       <div className="w-full" onClick={onClick}>
         <img className="rounded-tl-3xl rounded-tr-3xl w-full" src={image} alt="product image" />
         <div className="px-5 pb-5 md:px-3 md:pb-3">
