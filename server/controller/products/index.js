@@ -16,4 +16,8 @@ const fetchProducts = async (req, res) => {
   res.status(200).json({ data: products });
 };
 
-module.exports = { fetchProducts };
+const searchProducts = async (req, res) => {
+  if (!req.query.searchCategory) console.log('no category')
+};
+
+module.exports = { fetchProducts, searchProducts };
