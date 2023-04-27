@@ -49,9 +49,8 @@ export const SearchInput = ({ classes }) => {
         </div>
         <div className="relative w-full">
           <input onChange={(e) => {
-            setTimeout(() => {
-              const searchResults = handleSearch(e.target.value, searchCategory);
-              // console.log(searchResults);
+            setTimeout(async () => {
+              handleSearch(e.target.value, searchCategory).then((res) => console.log(res));
             }, 3000);
           }}
             type="search" id="search-dropdown" placeholder="Look for a product..." required
