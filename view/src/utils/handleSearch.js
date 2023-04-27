@@ -1,7 +1,8 @@
 import { searchService } from "api";
 
-export const handleSearch = (e, searchCategory) => {
-  setTimeout(() => {
-    searchService(searchCategory, e);
+export const handleSearch = async (e, searchCategory) => {
+  setTimeout(async () => {
+    const res = await searchService(searchCategory, e);
+    console.log(res);
   }, 3000);
 };

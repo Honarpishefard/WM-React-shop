@@ -17,7 +17,14 @@ const fetchProducts = async (req, res) => {
 };
 
 const searchProducts = async (req, res) => {
-  if (!req.query.searchCategory) console.log('no category')
+  if (!req.query.searchCategory) {
+    
+    // Product.find({$text: {$search: req?.query.query}}).skip(20).limit(10).exec(function(err, docs) { console.log(docs) });
+    
+    const results = await Product.find({ $text: { $search: req?.query?.query } });
+    return res.status(200).json({ data: results });
+
+  }
 };
 
 module.exports = { fetchProducts, searchProducts };
