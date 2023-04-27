@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { store } from "context";
+import { useContext, useState } from "react";
 import { handleSearch } from "utils";
 
 export const SearchInput = ({ classes }) => {
+  const { products, setProducts } = useContext(store);
   const [visibility, setVisibility] = useState(false);
   const [searchCategory, setSearchCategory] = useState("");
 
@@ -46,7 +48,13 @@ export const SearchInput = ({ classes }) => {
             </ul> : null }
         </div>
         <div className="relative w-full">
-          <input onChange={(e) => handleSearch(e.target.value, searchCategory)} type="search" id="search-dropdown" placeholder="Look for a product..." required
+          <input onChange={(e) => {
+            setTimeout(() => {
+              const searchResults = handleSearch(e.target.value, searchCategory);
+              // console.log(searchResults);
+            }, 3000);
+          }}
+            type="search" id="search-dropdown" placeholder="Look for a product..." required
             className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"/>
           <button type="submit"
             className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl rounded-r-lg h-full focus:ring-4 focus:outline-none focus:ring-blue-300">

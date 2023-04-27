@@ -9,6 +9,5 @@ export const fetchProductDetailsService = (category, sec, id) => {
 };
 
 export const searchService = (searchCategory, query) => {
-  const res = mainInstance.get(`/products/search?searchCategory=${searchCategory}&query=${query}`);
-  return res.data;
+  return mainInstance.get(`/products/search?searchCategory=${searchCategory}&query=${query}`);
 };
