@@ -7,7 +7,7 @@ import "assets/style/index.css";
 import { Button, Card, CardSkeleton } from "components";
 import { Link } from "react-router-dom";
 import { Dropdown } from "flowbite-react";
-import { handleAddToCard } from "utils/addToCard";
+import { handleAddToCard } from "utils";
 import Cookies from "js-cookie";
 
 export const ProductDetails = () => {

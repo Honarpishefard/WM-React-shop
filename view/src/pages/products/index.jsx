@@ -6,7 +6,7 @@ import { Footer, Header } from "layout";
 import { SideBar } from "./SideBar";
 import { store } from "context";
 import { Dropdown } from "flowbite-react";
-import { handleAddToCard } from "utils/addToCard";
+import { handleAddToCard } from "utils";
 import Cookies from "js-cookie";
 
 export const Products = () => {

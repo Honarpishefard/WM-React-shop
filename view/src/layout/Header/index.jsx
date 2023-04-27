@@ -3,13 +3,11 @@ import logo from "assets/images/headerLogo.jpg";
 import Cookies from "js-cookie";
 import { Button, SearchInput } from "components";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import { handleLogOut } from "utils/logout";
+import { handleLogOut, acronym } from "utils";
 import { useContext, useState } from "react";
 import { store } from "context";
-import "assets/style/index.css";
-import { acronym } from "utils/acronym";
 import { uploadsURL } from "api";
-import 'flowbite';
+import "assets/style/index.css";
 
 export const Header = () => {
   const [token, setToken] = useState(Cookies.get("loginToken"));

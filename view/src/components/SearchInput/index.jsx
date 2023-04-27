@@ -2,15 +2,13 @@ import { useState } from "react";
 
 export const SearchInput = ({ classes }) => {
   const [visibility, setVisibility] = useState(false);
-  console.log(visibility)
+  const [searchCategory, setSearchCategory] = useState('');
 
   return (
     <form className={classes}>
       <div className="flex w-full relative">
-        <label htmlFor="search-dropdown" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
-          Search
-        </label>
-        <button onClick={() => setVisibility(!visibility)} type="button" id="dropdown-button" data-dropdown-toggle="dropdown" className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
+        <label htmlFor="search-dropdown" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+        <button onClick={() => setVisibility(!visibility)} type="button" id="dropdown-button" data-dropdown-toggle="dropdown" className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
           All categories
           <svg aria-hidden="true" className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path>
@@ -18,7 +16,7 @@ export const SearchInput = ({ classes }) => {
         </button>
         <div id="dropdown" className="z-10 hidden md:flex absolute top-full mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-36 dark:bg-gray-700">
           { visibility ? 
-            <ul className="py-2 text-sm w-full text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+            <ul onClick={(e) => console.log(e.target.innerHTML)} className="py-2 text-sm w-full text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
               <li>
                 <button type="button" className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                   Jackets
@@ -27,11 +25,6 @@ export const SearchInput = ({ classes }) => {
               <li>
                 <button type="button" className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                   Shoes
-                </button>
-              </li>
-              <li>
-                <button type="button" className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                  Design
                 </button>
               </li>
               <li>

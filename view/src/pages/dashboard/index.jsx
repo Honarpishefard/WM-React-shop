@@ -2,7 +2,7 @@ import { AccordionComponent, Button, FileInput, ModalComponent, TextField } from
 import { store } from "context";
 import { Header } from "layout";
 import { useContext, useState } from "react";
-import { acronym } from "utils/acronym";
+import { acronym } from "utils";
 import useDashboard from "./useDashboard";
 import { uploadsURL, changeUserInfoService } from "api";
 import { toast } from "react-toastify";
