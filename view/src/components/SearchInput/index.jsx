@@ -1,19 +1,16 @@
 import { mediaURL } from "api";
 import { Card, ModalComponent } from "components";
-import { store } from "context";
 import { Dropdown } from "flowbite-react";
 import Cookies from "js-cookie";
-import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { handleAddToCard, handleSearch } from "utils";
 
 export const SearchInput = ({ classes }) => {
   const navigate = useNavigate();
-  const { products, setProducts } = useContext(store);
   const [visibility, setVisibility] = useState(false);
   const [searchCategory, setSearchCategory] = useState("");
   const [searchInputValue, setSearchInputValue] = useState("");
-  const [searchResults, setSearchResults] = useState();
+  const [searchResults, setSearchResults] = useState('');
   const [size, setSize] = useState();
   const [quantity, setQuantity] = useState(1);
 
@@ -74,10 +71,10 @@ export const SearchInput = ({ classes }) => {
           </button>
         </div>
       </div>
-      { !searchResults && searchInputValue ? ( <div className="flex justify-center items-start bg-gray-50 py-5 px-6 mt-1 rounded-md">
+      { searchResults.length == 0 && searchInputValue ? ( <div className="flex justify-center items-start bg-gray-50 py-5 px-6 mt-1 rounded-md">
         <p className="text-gray-400 font-normal text-base py-10">No results...</p>
       </div> ) : null }
-      { searchResults ? <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 justify-center items-start bg-gray-50 py-5 px-6 mt-1 rounded-md">
+      { searchResults.length != 0 ? <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 justify-center items-start bg-gray-50 py-5 px-6 mt-1 rounded-md">
         {searchResults?.map((i) => ( <Card onClick={() => navigate(`/products/${i.category[0]}/${i.category[1]}/${i._id}`)} 
           key={i._id} title={i.title} newPrice={i.newPrice}oldPrice={i.oldPrice} image={mediaURL + i.image}>
             <ModalComponent
@@ -107,7 +104,7 @@ export const SearchInput = ({ classes }) => {
               </div>
             </ModalComponent>
           </Card> ))}
-      </div> : null }
+      </div> : null}
     </form>
   );
 };

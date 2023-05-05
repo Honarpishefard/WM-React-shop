@@ -40,4 +40,5 @@ div[data-testid="flowbite-tooltip"]>div>ul>div[data-testid="flowbite-tooltip-tar
 
 .search-form{
     margin: 0 !important;
+    overflow: scroll;
 }
