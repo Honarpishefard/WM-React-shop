@@ -1,10 +1,13 @@
 {
   "name": "vite-project",
+  "homepage": "https://honarpishefard.github.io/WM-React-shop",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -28,6 +31,7 @@
     "@vitejs/plugin-react": "^3.0.0",
     "autoprefixer": "^10.4.13",
     "axios": "^1.2.3",
+    "gh-pages": "^5.0.0",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.6",
     "vite": "^4.0.0"

@@ -7,7 +7,7 @@ import ContextProvider from "context";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/WM-React-shop/">
       <ContextProvider>
         <App />
       </ContextProvider>
