@@ -18,7 +18,7 @@ export const Header = () => {
 
   return (
     <>
-      <Navbar fluid={true} rounded={false} className="px-10 sticky top-0">
+      <Navbar fluid={true} rounded={false} className="px-10 sticky top-0 z-1">
         <div className="md:flex grow items-start">
           <Link to="/" className="flex">
             <img src={logo} className="mr-3 h-6 sm:h-9" alt="Header Logo" />
