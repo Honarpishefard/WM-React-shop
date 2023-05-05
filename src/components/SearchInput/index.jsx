@@ -72,10 +72,10 @@ export const SearchInput = ({ classes }) => {
           </button>
         </div>
       </div>
-      { searchResults.length == 0 && searchInputValue ? ( <div className="flex justify-center items-start bg-gray-50 py-5 px-6 mt-1 rounded-md">
+      { searchResults.length == 0 && searchInputValue ? ( <div className="flex justify-center items-start bg-white py-5 px-6 mt-1 rounded-md">
         <p className="text-gray-400 font-normal text-base py-10">No results...</p>
       </div> ) : null }
-      { searchResults.length != 0 ? <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 justify-center items-start bg-gray-50 py-5 px-6 mt-1 rounded-md">
+      { searchResults.length != 0 ? <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 justify-center items-start bg-white py-5 px-6 mt-1 rounded-md">
         {searchResults?.map((i) => ( <Card onClick={() => navigate(`/products/${i.category[0]}/${i.category[1]}/${i._id}`)} 
           key={i._id} title={i.title} newPrice={i.newPrice}oldPrice={i.oldPrice} image={mediaURL + i.image}>
             <ModalComponent

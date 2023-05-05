@@ -8,7 +8,7 @@ export function Signup() {
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900 py-10">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen my-12">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  my-12">
         <Link to='/' className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
           <img className="w-8 h-8 mr-2" src={logo} alt="logo" />
           W&M

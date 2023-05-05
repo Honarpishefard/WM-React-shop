@@ -18,7 +18,7 @@ export const Header = () => {
 
   return (
     <>
-      <Navbar fluid={true} rounded={true} className="px-10 relative">
+      <Navbar fluid={true} rounded={false} className="px-10 sticky top-0">
         <div className="md:flex grow items-start">
           <Link to="/" className="flex">
             <img src={logo} className="mr-3 h-6 sm:h-9" alt="Header Logo" />
@@ -84,7 +84,7 @@ export const Header = () => {
             <Navbar.Toggle />
           </div> ) : (
           <div className="flex self-start">
-            <Link to="/login" className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+            <Link to="/login" className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
               Log in
             </Link>
             <Link to="/signup"><Button classes="mr-0 mb-0">Sign Up</Button></Link>
