@@ -4,13 +4,14 @@ import { Dropdown } from "flowbite-react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
 import { handleAddToCard, handleSearch } from "utils";
+import { useState } from "react";
 
 export const SearchInput = ({ classes }) => {
   const navigate = useNavigate();
   const [visibility, setVisibility] = useState(false);
   const [searchCategory, setSearchCategory] = useState("");
   const [searchInputValue, setSearchInputValue] = useState("");
-  const [searchResults, setSearchResults] = useState('');
+  const [searchResults, setSearchResults] = useState("");
   const [size, setSize] = useState();
   const [quantity, setQuantity] = useState(1);
 
