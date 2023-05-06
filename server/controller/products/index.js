@@ -1,4 +1,4 @@
-const { Product } = require("../../model/product");
+const { Product } = require("../../model/Product");
 
 const fetchProducts = async (req, res) => {
   if (req.query.category) {

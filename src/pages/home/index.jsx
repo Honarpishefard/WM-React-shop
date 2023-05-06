@@ -41,7 +41,7 @@ export const Home = () => {
             <CardSkeleton key={i._id} />
           ) : data ? (
             <Link
-              to={`/products/${data[i].category[0]}/${data[i].category[1]}/${data[i]._id}`} key={i?._id}>
+              to={`/products/${data[i]?.category[0]}/${data[i]?.category[1]}/${data[i]?._id}`} key={i?._id}>
               <Card key={data[i]?._id} title={data[i]?.title} newPrice={data[i]?.newPrice} oldPrice={data[i]?.oldPrice} image={mediaURL + data[i]?.image}/>
             </Link>
           ) : null

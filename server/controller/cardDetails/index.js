@@ -1,5 +1,5 @@
 const { User } = require("../../model/User");
-const { Product } = require("../../model/product");
+const { Product } = require("../../model/Product");
 
 const handleFetchCards = async (req, res) => {
   const { userId } = req.body;
@@ -14,14 +14,11 @@ const handleFetchCards = async (req, res) => {
     user.cardProducts.map(async (i) => {
       const data = await findProduct(i.productId);
       const info = { size: i.size, quantity: i.quantity };
-
       return [data, info];
     })
-  )
-    .then((products) => {
+  ).then((products) => {
       res.status(200).json({ data: products });
-    })
-    .catch((err) => {
+    }).catch((err) => {
       res.status(404).json({ message: "something went wrong" });
     });
 };
@@ -33,10 +30,7 @@ const handleAddToCard = async (req, res) => {
     userId,
     { $addToSet: { cardProducts: { productId, size, quantity } } },
     { new: true }
-  )
-    .then(() => {
-      res.status(200).json({ message: "added to card succesfuly" });
-    })
+  ).then(() => { res.status(200).json({ message: "added to card succesfuly" })})
     .catch((ex) => res.status(400).json({ message: ex }));
 };
 
@@ -45,10 +39,7 @@ const handleRemoveFromCard = async (req, res) => {
 
   await User.findByIdAndUpdate(userId, {
     $pull: { cardProducts: { productId, size, quantity } },
-  })
-    .then(() => {
-      res.status(200).json({ message: "removed from card succesfuly" });
-    })
+  }).then(() => { res.status(200).json({ message: "removed from card succesfuly" })})
     .catch((ex) => res.status(400).json({ message: ex }));
 };
 
