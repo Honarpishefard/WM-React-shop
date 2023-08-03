@@ -21,7 +21,3 @@ server.use(fileUpload({
 server.use("/api", require("./routes").router);
 server.use("/statics", express.static(appRootPath + "/public"));
 server.use("/api/cardDetails", require("./middlewares/authenticator").authenticator);
-
-const handleMainRoute = (req, res) => {
-  res.json({ home: "hello" });
-};
